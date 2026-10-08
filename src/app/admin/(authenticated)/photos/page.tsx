@@ -12,7 +12,7 @@ export default async function AdminPhotosPage() {
       title="Photos"
       items={photos}
       fields={[
-        { name: "src", label: "Image URL" },
+        { name: "src", label: "Photo", type: "image" },
         { name: "alt", label: "Alt text" },
         { name: "caption", label: "Caption (optional)" },
       ]}

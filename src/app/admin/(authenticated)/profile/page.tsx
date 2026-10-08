@@ -1,5 +1,6 @@
 import AdminListEditor from "../_components/AdminListEditor";
 import SubmitButton from "../_components/SubmitButton";
+import ImageUploadField from "../_components/ImageUploadField";
 import { updateAbout, updateSiteSettings } from "../../actions";
 import { getAbout, getEducation, getInterests, getSiteSettings } from "@/lib/content";
 
@@ -68,14 +69,9 @@ export default async function AdminProfilePage() {
           </div>
           <div>
             <label className="block text-xs uppercase tracking-wide text-ink-faint mb-1.5">
-              Profile photo URL (optional)
+              Profile photo (optional)
             </label>
-            <input
-              type="text"
-              name="profileImage"
-              defaultValue={about.profileImage ?? ""}
-              className={inputClass}
-            />
+            <ImageUploadField name="profileImage" defaultValue={about.profileImage ?? ""} />
           </div>
         </div>
         <SubmitButton

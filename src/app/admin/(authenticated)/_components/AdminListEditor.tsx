@@ -1,10 +1,11 @@
 import { createListItem, deleteListItem, updateListItem } from "../../actions";
 import SubmitButton from "./SubmitButton";
+import ImageUploadField from "./ImageUploadField";
 
 export type FieldConfig = {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "list";
+  type?: "text" | "textarea" | "list" | "image";
   placeholder?: string;
 };
 
@@ -17,6 +18,10 @@ function FieldInput({
 }) {
   const className =
     "w-full rounded-sm border border-line bg-paper px-3 py-2 text-sm text-ink outline-none transition-colors focus:border-accent";
+
+  if (field.type === "image") {
+    return <ImageUploadField name={field.name} defaultValue={defaultValue} />;
+  }
 
   if (field.type === "textarea" || field.type === "list") {
     return (
@@ -41,8 +46,10 @@ function FieldInput({
   );
 }
 
-function valueToDefault(value: unknown): string {
-  if (Array.isArray(value)) return value.join("\n");
+function valueToDefault(value: unknown, type?: FieldConfig["type"]): string {
+  if (Array.isArray(value)) {
+    return type === "image" ? (value[0] ?? "") : value.join("\n");
+  }
   return value == null ? "" : String(value);
 }
 
@@ -83,13 +90,19 @@ export default function AdminListEditor<T extends { id: number }>({
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {fields.map((field) => (
-                  <div key={field.name} className={field.type === "textarea" ? "sm:col-span-2" : ""}>
+                  <div
+                    key={field.name}
+                    className={field.type === "textarea" || field.type === "image" ? "sm:col-span-2" : ""}
+                  >
                     <label className="block text-xs uppercase tracking-wide text-ink-faint mb-1.5">
                       {field.label}
                     </label>
                     <FieldInput
                       field={field}
-                      defaultValue={valueToDefault((item as Record<string, unknown>)[field.name])}
+                      defaultValue={valueToDefault(
+                        (item as Record<string, unknown>)[field.name],
+                        field.type
+                      )}
                     />
                   </div>
                 ))}
@@ -122,7 +135,10 @@ export default function AdminListEditor<T extends { id: number }>({
         <form action={create} className="rounded-sm border border-line border-dashed bg-surface/50 p-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {fields.map((field) => (
-              <div key={field.name} className={field.type === "textarea" ? "sm:col-span-2" : ""}>
+              <div
+                key={field.name}
+                className={field.type === "textarea" || field.type === "image" ? "sm:col-span-2" : ""}
+              >
                 <label className="block text-xs uppercase tracking-wide text-ink-faint mb-1.5">
                   {field.label}
                 </label>

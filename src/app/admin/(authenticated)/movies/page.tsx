@@ -14,7 +14,7 @@ export default async function AdminMoviesPage() {
       fields={[
         { name: "title", label: "Title" },
         { name: "year", label: "Year" },
-        { name: "poster", label: "Poster URL (optional)" },
+        { name: "poster", label: "Poster (optional)", type: "image" },
         { name: "rating", label: "Rating (optional)" },
         { name: "thoughts", label: "Thoughts (optional)", type: "textarea" },
         { name: "link", label: "Link (optional)" },

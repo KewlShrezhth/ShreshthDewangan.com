@@ -16,7 +16,7 @@ export default async function AdminAwardsPage() {
         { name: "organization", label: "Organization" },
         { name: "year", label: "Year" },
         { name: "description", label: "Description (optional)", type: "textarea" },
-        { name: "image", label: "Image URL (optional)" },
+        { name: "image", label: "Image (optional)", type: "image" },
       ]}
     />
   );

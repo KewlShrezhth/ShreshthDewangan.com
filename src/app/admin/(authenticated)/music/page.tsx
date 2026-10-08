@@ -14,7 +14,7 @@ export default async function AdminMusicPage() {
       fields={[
         { name: "title", label: "Title" },
         { name: "artist", label: "Artist" },
-        { name: "artwork", label: "Artwork URL (optional)" },
+        { name: "artwork", label: "Artwork (optional)", type: "image" },
         { name: "link", label: "Link (optional)" },
         { name: "note", label: "Personal note (optional)", type: "textarea" },
       ]}

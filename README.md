@@ -27,7 +27,7 @@ All content lives in the database now, not in code. Edit everything at **`/admin
 
 Changes save straight to the database and appear on the live site immediately — no code, no redeploy.
 
-Image fields currently take a URL (host the image anywhere and paste the link) rather than a file upload.
+Image fields (profile photo, project image, photos, award image, artwork, poster) use "Choose from library" to upload a file directly from your device — it uploads to Vercel Blob storage and fills in the URL automatically.
 
 ## Environment variables
 
@@ -36,6 +36,7 @@ Required in `.env.local` locally and in your Vercel project's environment variab
 - `DATABASE_URL` — Postgres connection string (from the Vercel/Neon integration)
 - `ADMIN_PASSWORD` — the password for `/admin`
 - `ADMIN_SESSION_SECRET` — a long random string used to sign the admin session cookie
+- `BLOB_READ_WRITE_TOKEN` — from a **public** Vercel Blob store (image uploads need public read access; private stores won't work for this)
 
 ## Database scripts
 
