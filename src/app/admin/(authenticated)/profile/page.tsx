@@ -1,4 +1,5 @@
 import AdminListEditor from "../_components/AdminListEditor";
+import SubmitButton from "../_components/SubmitButton";
 import { updateAbout, updateSiteSettings } from "../../actions";
 import { getAbout, getEducation, getInterests, getSiteSettings } from "@/lib/content";
 
@@ -36,12 +37,12 @@ export default async function AdminProfilePage() {
               <input type="text" name="tagline" defaultValue={site.tagline} className={inputClass} />
             </div>
           </div>
-          <button
-            type="submit"
-            className="mt-4 rounded-sm bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
+          <SubmitButton
+            pendingLabel="Saving…"
+            className="mt-4 rounded-sm bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift disabled:opacity-60"
           >
             Save
-          </button>
+          </SubmitButton>
         </form>
       </div>
 
@@ -77,12 +78,12 @@ export default async function AdminProfilePage() {
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="mt-4 rounded-sm bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
+        <SubmitButton
+          pendingLabel="Saving…"
+          className="mt-4 rounded-sm bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift disabled:opacity-60"
         >
           Save
-        </button>
+        </SubmitButton>
       </form>
 
       <AdminListEditor

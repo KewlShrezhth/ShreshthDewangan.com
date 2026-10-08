@@ -1,4 +1,5 @@
 import { createListItem, deleteListItem, updateListItem } from "../../actions";
+import SubmitButton from "./SubmitButton";
 
 export type FieldConfig = {
   name: string;
@@ -94,18 +95,20 @@ export default function AdminListEditor<T extends { id: number }>({
                 ))}
               </div>
               <div className="mt-4 flex items-center gap-3">
-                <button
-                  type="submit"
-                  className="rounded-sm bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
+                <SubmitButton
+                  pendingLabel="Saving…"
+                  className="rounded-sm bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift disabled:opacity-60"
                 >
                   Save
-                </button>
-                <button
+                </SubmitButton>
+                <SubmitButton
                   formAction={remove}
-                  className="rounded-sm border border-line px-4 py-2 text-xs font-semibold uppercase tracking-wide text-ink-faint transition-colors hover:border-accent/40 hover:text-accent"
+                  pendingLabel="Deleting…"
+                  savedLabel="Deleted"
+                  className="rounded-sm border border-line px-4 py-2 text-xs font-semibold uppercase tracking-wide text-ink-faint transition-colors hover:border-accent/40 hover:text-accent disabled:opacity-60"
                 >
                   Delete
-                </button>
+                </SubmitButton>
               </div>
             </form>
           );
@@ -127,12 +130,13 @@ export default function AdminListEditor<T extends { id: number }>({
               </div>
             ))}
           </div>
-          <button
-            type="submit"
-            className="mt-4 rounded-sm bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
+          <SubmitButton
+            pendingLabel="Adding…"
+            savedLabel="Added"
+            className="mt-4 rounded-sm bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift disabled:opacity-60"
           >
             Add
-          </button>
+          </SubmitButton>
         </form>
       </div>
     </div>
