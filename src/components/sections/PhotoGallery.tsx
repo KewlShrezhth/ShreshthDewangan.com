@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import type { Photo } from "@/data/photos";
+import type { Photo } from "@/lib/content";
 
 export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

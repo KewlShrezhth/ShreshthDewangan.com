@@ -1,9 +1,11 @@
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
-import { movies } from "@/data/movies";
+import { getMovies } from "@/lib/content";
 
-export default function Movies() {
+export default async function Movies() {
+  const movies = await getMovies();
+
   return (
     <section id="movies" className="py-24 md:py-32 border-t border-line scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6 md:px-10">

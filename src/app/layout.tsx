@@ -21,7 +21,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${anton.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${anton.variable} ${inter.variable}`}
+    >
       <body className="min-h-full flex flex-col">
         <CursorSpotlight />
         <div className="relative z-10 flex min-h-full flex-1 flex-col">{children}</div>

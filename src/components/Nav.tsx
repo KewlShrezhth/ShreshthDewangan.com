@@ -1,9 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { nav, site } from "@/data/site";
 
-export default function Nav() {
+const nav = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "photos", label: "Photos" },
+  { id: "awards", label: "Awards" },
+  { id: "music", label: "Music" },
+  { id: "movies", label: "Movies" },
+  { id: "links", label: "Links" },
+] as const;
+
+export default function Nav({ siteName }: { siteName: string }) {
   const [active, setActive] = useState<string>("about");
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +56,7 @@ export default function Nav() {
             href="#about"
             className="font-display text-lg uppercase tracking-tight text-ink transition-colors hover:text-accent"
           >
-            {site.name}
+            {siteName}
           </a>
 
           <nav className="hidden md:flex items-center gap-7">

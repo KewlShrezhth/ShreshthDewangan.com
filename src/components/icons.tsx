@@ -1,5 +1,3 @@
-import type { LinkKind } from "@/data/links";
-
 const common = {
   width: 20,
   height: 20,
@@ -7,7 +5,7 @@ const common = {
   fill: "currentColor",
 };
 
-export function Icon({ kind }: { kind: LinkKind }) {
+export function Icon({ kind }: { kind: string }) {
   switch (kind) {
     case "github":
       return (

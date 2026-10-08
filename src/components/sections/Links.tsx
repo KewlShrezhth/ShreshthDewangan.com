@@ -1,9 +1,11 @@
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import { Icon } from "@/components/icons";
-import { links } from "@/data/links";
+import { getLinks } from "@/lib/content";
 
-export default function Links() {
+export default async function Links() {
+  const links = await getLinks();
+
   return (
     <section id="links" className="py-24 md:py-32 border-t border-line scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6 md:px-10">

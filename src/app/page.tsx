@@ -7,11 +7,16 @@ import Awards from "@/components/sections/Awards";
 import Music from "@/components/sections/Music";
 import Movies from "@/components/sections/Movies";
 import Links from "@/components/sections/Links";
+import { getSiteSettings } from "@/lib/content";
 
-export default function Home() {
+export const instant = false;
+
+export default async function Home() {
+  const site = await getSiteSettings();
+
   return (
     <>
-      <Nav />
+      <Nav siteName={site.name} />
       <main>
         <About />
         <Projects />
@@ -21,7 +26,7 @@ export default function Home() {
         <Movies />
         <Links />
       </main>
-      <Footer />
+      <Footer siteName={site.name} />
     </>
   );
 }

@@ -1,9 +1,15 @@
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
-import { about } from "@/data/about";
-import { site } from "@/data/site";
+import { getAbout, getEducation, getInterests, getSiteSettings } from "@/lib/content";
 
-export default function About() {
+export default async function About() {
+  const [about, interests, education, site] = await Promise.all([
+    getAbout(),
+    getInterests(),
+    getEducation(),
+    getSiteSettings(),
+  ]);
+
   return (
     <section
       id="about"
@@ -57,12 +63,12 @@ export default function About() {
                   Interests
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {about.interests.map((item) => (
+                  {interests.map((item) => (
                     <span
-                      key={item}
+                      key={item.id}
                       className="rounded-full border border-line px-3 py-1 text-sm text-ink-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-soft/50 hover:text-ink hover:shadow-soft"
                     >
-                      {item}
+                      {item.label}
                     </span>
                   ))}
                 </div>
@@ -72,8 +78,8 @@ export default function About() {
                   Education
                 </h3>
                 <ul className="space-y-3 text-ink-soft">
-                  {about.education.map((e, i) => (
-                    <li key={i}>
+                  {education.map((e) => (
+                    <li key={e.id}>
                       <p className="text-ink">{e.school}</p>
                       <p className="text-sm">{e.detail}</p>
                     </li>

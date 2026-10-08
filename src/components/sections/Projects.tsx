@@ -1,9 +1,11 @@
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/content";
 
-export default function Projects() {
+export default async function Projects() {
+  const projects = await getProjects();
+
   return (
     <section id="projects" className="py-24 md:py-32 border-t border-line scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6 md:px-10">

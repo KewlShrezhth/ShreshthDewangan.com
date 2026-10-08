@@ -1,8 +1,13 @@
-This is a personal portfolio site built with [Next.js](https://nextjs.org) (App Router), TypeScript, and Tailwind CSS.
+This is a personal portfolio site built with [Next.js](https://nextjs.org) (App Router), TypeScript, Tailwind CSS, and Postgres (Neon).
 
 ## Getting Started
 
+Copy the database and admin env vars into `.env.local` (not committed — ask for the values if you don't have them), then:
+
 ```bash
+npm install
+npm run db:migrate   # creates tables if they don't exist yet
+npm run db:seed       # only needed once, to seed placeholder content into a fresh database
 npm run dev
 ```
 
@@ -10,17 +15,29 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Editing content
 
-All editable content lives in `src/data/` — one file per section. No need to touch components to add or change content:
+All content lives in the database now, not in code. Edit everything at **`/admin`** (e.g. `https://yoursite.com/admin`), protected by the password in `ADMIN_PASSWORD`:
 
-- `src/data/about.ts` — name, intro paragraphs, interests, education, profile image
-- `src/data/projects.ts` — project name, description, stack, images, GitHub/live links
-- `src/data/photos.ts` — gallery photos (add image files to `public/photos/` and reference them, e.g. `"/photos/my-photo.jpg"`)
-- `src/data/awards.ts` — award title, organization, year, description, optional image
-- `src/data/music.ts` — song/album, artist, artwork, link, personal note
-- `src/data/movies.ts` — title, year, poster, rating, thoughts, link
-- `src/data/links.ts` — external links (GitHub stays first)
-- `src/data/site.ts` — site name and tagline shown in the nav/hero
+- **Profile** — site name, tagline, bio, interests, education, profile photo
+- **Projects** — name, description, stack, image URLs, GitHub/live links
+- **Photos** — gallery images
+- **Awards** — title, organization, year, description, optional image
+- **Music** — title, artist, artwork, link, personal note
+- **Movies** — title, year, poster, rating, thoughts, link
+- **Links** — external links
 
-Images referenced from these files should be placed under `public/` (e.g. `public/photos/`, `public/projects/`, `public/awards/`, `public/music/`, `public/movies/`) and referenced with a leading `/`.
+Changes save straight to the database and appear on the live site immediately — no code, no redeploy.
 
-Sections with no content yet (or missing images) automatically fall back to a clean placeholder, so the site stays visually complete while real content is filled in.
+Image fields currently take a URL (host the image anywhere and paste the link) rather than a file upload.
+
+## Environment variables
+
+Required in `.env.local` locally and in your Vercel project's environment variables for production:
+
+- `DATABASE_URL` — Postgres connection string (from the Vercel/Neon integration)
+- `ADMIN_PASSWORD` — the password for `/admin`
+- `ADMIN_SESSION_SECRET` — a long random string used to sign the admin session cookie
+
+## Database scripts
+
+- `npm run db:migrate` — creates/updates tables from `scripts/schema.sql`. Safe to re-run.
+- `npm run db:seed` — inserts placeholder rows, but only into empty tables. Safe to re-run.

@@ -1,9 +1,11 @@
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
-import { awards } from "@/data/awards";
+import { getAwards } from "@/lib/content";
 
-export default function Awards() {
+export default async function Awards() {
+  const awards = await getAwards();
+
   return (
     <section id="awards" className="py-24 md:py-32 border-t border-line scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6 md:px-10">

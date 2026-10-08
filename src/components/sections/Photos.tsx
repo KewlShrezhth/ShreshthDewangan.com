@@ -2,9 +2,11 @@ import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
 import PhotoGallery from "./PhotoGallery";
-import { photos } from "@/data/photos";
+import { getPhotos } from "@/lib/content";
 
-export default function Photos() {
+export default async function Photos() {
+  const photos = await getPhotos();
+
   return (
     <section id="photos" className="py-24 md:py-32 border-t border-line scroll-mt-16">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
