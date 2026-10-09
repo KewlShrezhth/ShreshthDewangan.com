@@ -3,14 +3,14 @@
 import { useEffect, useRef } from "react";
 
 const GUILLOCHE_SVG = `<svg xmlns='http://www.w3.org/2000/svg' width='55' height='55'>
-  <g fill='none' stroke='#c99a34' stroke-width='0.6'>
-    <circle cx='27.5' cy='27.5' r='26' stroke-opacity='0.55'/>
-    <circle cx='27.5' cy='27.5' r='18' stroke-opacity='0.4' stroke-width='0.5'/>
-    <circle cx='27.5' cy='27.5' r='9' stroke-opacity='0.3' stroke-width='0.5'/>
-    <circle cx='0' cy='0' r='26' stroke-opacity='0.35' stroke-width='0.5'/>
-    <circle cx='55' cy='55' r='26' stroke-opacity='0.35' stroke-width='0.5'/>
-    <circle cx='55' cy='0' r='26' stroke-opacity='0.35' stroke-width='0.5'/>
-    <circle cx='0' cy='55' r='26' stroke-opacity='0.35' stroke-width='0.5'/>
+  <g fill='none' stroke='#e2b84a' stroke-width='1'>
+    <circle cx='27.5' cy='27.5' r='26' stroke-opacity='0.9'/>
+    <circle cx='27.5' cy='27.5' r='18' stroke-opacity='0.75' stroke-width='0.9'/>
+    <circle cx='27.5' cy='27.5' r='9' stroke-opacity='0.6' stroke-width='0.9'/>
+    <circle cx='0' cy='0' r='26' stroke-opacity='0.65' stroke-width='0.9'/>
+    <circle cx='55' cy='55' r='26' stroke-opacity='0.65' stroke-width='0.9'/>
+    <circle cx='55' cy='0' r='26' stroke-opacity='0.65' stroke-width='0.9'/>
+    <circle cx='0' cy='55' r='26' stroke-opacity='0.65' stroke-width='0.9'/>
   </g>
 </svg>`;
 
@@ -47,13 +47,13 @@ export default function CursorSpotlight() {
     <div
       ref={ref}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 opacity-70 transition-[mask-position] duration-100"
+      className="pointer-events-none fixed inset-0 z-0 opacity-100"
       style={{
         backgroundImage: PATTERN_URL,
         maskImage:
-          "radial-gradient(260px circle at var(--spot-x, -9999px) var(--spot-y, -9999px), black 0%, black 35%, transparent 80%)",
+          "radial-gradient(320px circle at var(--spot-x, -9999px) var(--spot-y, -9999px), black 0%, black 50%, transparent 90%)",
         WebkitMaskImage:
-          "radial-gradient(260px circle at var(--spot-x, -9999px) var(--spot-y, -9999px), black 0%, black 35%, transparent 80%)",
+          "radial-gradient(320px circle at var(--spot-x, -9999px) var(--spot-y, -9999px), black 0%, black 50%, transparent 90%)",
       }}
     />
   );
