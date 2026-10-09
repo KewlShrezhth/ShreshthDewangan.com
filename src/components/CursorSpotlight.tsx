@@ -23,7 +23,7 @@ export default function CursorSpotlight() {
     const el = ref.current;
     if (!el) return;
 
-    const media = window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)");
+    const media = window.matchMedia("(pointer: coarse)");
     if (media.matches) return;
 
     let frame = 0;
