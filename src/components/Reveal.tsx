@@ -17,17 +17,35 @@ export default function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+
+    // Safety net: some browsers (seen on WebKit/mobile Safari) can fail to
+    // ever fire the IntersectionObserver callback for content that's
+    // already in view at mount, which would otherwise leave it invisible
+    // forever. A fallback timer guarantees content always shows up.
+    const fallback = window.setTimeout(() => setVisible(true), 1200);
+
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      try {
+        observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setVisible(true);
+              observer?.disconnect();
+            }
+          },
+          { threshold: 0.15 }
+        );
+        observer.observe(el);
+      } catch {
+        observer = null;
+      }
+    }
+
+    return () => {
+      window.clearTimeout(fallback);
+      observer?.disconnect();
+    };
   }, []);
 
   return (
