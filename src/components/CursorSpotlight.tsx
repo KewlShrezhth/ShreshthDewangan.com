@@ -23,11 +23,13 @@ export default function CursorSpotlight() {
     const el = ref.current;
     if (!el) return;
 
-    const media = window.matchMedia("(pointer: coarse)");
-    if (media.matches) return;
-
     let frame = 0;
     const onMove = (e: PointerEvent) => {
+      // Ignore touch drags; a laptop with a touchscreen can report
+      // `pointer: coarse` for its primary input even while a real mouse
+      // is in use, so we gate per-event on the event's own pointerType
+      // instead of a static media query.
+      if (e.pointerType === "touch") return;
       if (frame) return;
       frame = requestAnimationFrame(() => {
         el.style.setProperty("--spot-x", `${e.clientX}px`);
