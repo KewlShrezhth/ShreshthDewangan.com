@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { TabsProvider, TabPanel } from "@/components/Tabs";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Photos from "@/components/sections/Photos";
@@ -15,18 +16,32 @@ export default async function Home() {
   const site = await getSiteSettings();
 
   return (
-    <>
+    <TabsProvider>
       <Nav siteName={site.name} />
       <main>
-        <About />
-        <Projects />
-        <Photos />
-        <Awards />
-        <Music />
-        <Movies />
-        <Links />
+        <TabPanel id="about">
+          <About />
+        </TabPanel>
+        <TabPanel id="projects">
+          <Projects />
+        </TabPanel>
+        <TabPanel id="photos">
+          <Photos />
+        </TabPanel>
+        <TabPanel id="awards">
+          <Awards />
+        </TabPanel>
+        <TabPanel id="music">
+          <Music />
+        </TabPanel>
+        <TabPanel id="movies">
+          <Movies />
+        </TabPanel>
+        <TabPanel id="links">
+          <Links />
+        </TabPanel>
       </main>
       <Footer siteName={site.name} />
-    </>
+    </TabsProvider>
   );
 }

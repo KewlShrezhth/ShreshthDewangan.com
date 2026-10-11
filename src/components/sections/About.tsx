@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
+import GoToTab from "@/components/GoToTab";
 import { getAbout, getEducation, getInterests, getSiteSettings } from "@/lib/content";
 
 export default async function About() {
@@ -11,10 +12,7 @@ export default async function About() {
   ]);
 
   return (
-    <section
-      id="about"
-      className="relative overflow-hidden pt-20 md:pt-28 pb-24 md:pb-32 scroll-mt-16"
-    >
+    <section className="relative overflow-hidden pt-20 md:pt-28 pb-24 md:pb-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-25 blur-3xl animate-float-slow"
@@ -38,15 +36,15 @@ export default async function About() {
             {site.tagline}
           </p>
 
-          <a
-            href="#projects"
+          <GoToTab
+            id="projects"
             className="hover-lift group mt-8 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
           >
             See my work
             <span className="transition-transform duration-300 group-hover:translate-y-0.5">
               ↓
             </span>
-          </a>
+          </GoToTab>
         </Reveal>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_280px] gap-12 md:gap-16 items-start">

@@ -7,7 +7,7 @@ export default async function Projects() {
   const projects = await getProjects();
 
   return (
-    <section id="projects" className="py-24 md:py-32 border-t border-line scroll-mt-16">
+    <section className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading index="01" title="Projects" note="A few things I've built." />
