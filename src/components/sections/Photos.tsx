@@ -8,7 +8,7 @@ export default async function Photos() {
   const photos = await getPhotos();
 
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32 overflow-x-clip">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading index="02" title="Photos" note="Moments worth keeping." />
