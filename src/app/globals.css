@@ -78,6 +78,15 @@ body {
   transform: translateY(-5px);
 }
 
+/* Instant feedback on press — don't wait for release to feel responsive. */
+.press {
+  transition: transform 0.1s ease-out;
+}
+
+.press:active {
+  transform: scale(0.96);
+}
+
 @keyframes float-slow {
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(14px, -18px); }

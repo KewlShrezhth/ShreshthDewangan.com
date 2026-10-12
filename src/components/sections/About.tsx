@@ -38,7 +38,7 @@ export default async function About() {
 
           <GoToTab
             id="projects"
-            className="hover-lift group mt-8 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
+            className="press hover-lift group mt-8 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
           >
             See my work
             <span className="transition-transform duration-300 group-hover:translate-y-0.5">

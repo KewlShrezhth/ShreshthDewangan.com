@@ -32,8 +32,10 @@ export default function Nav({ siteName }: { siteName: string }) {
 
   return (
     <header
-      className={`sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-paper/80 bg-paper/95 border-b border-line transition-shadow duration-300 ${
-        scrolled ? "shadow-soft" : ""
+      className={`sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-paper/80 bg-paper/95 transition-shadow duration-300 ${
+        scrolled
+          ? "shadow-[0_12px_20px_-16px_rgba(0,0,0,0.6)]"
+          : "shadow-[0_1px_0_0_var(--line)]"
       }`}
     >
       <div aria-hidden="true" className="h-[2px] w-full bg-gold" />
@@ -41,7 +43,7 @@ export default function Nav({ siteName }: { siteName: string }) {
         <div className="flex h-16 items-center justify-between">
           <button
             onClick={() => go("about")}
-            className="font-display text-lg uppercase tracking-tight text-ink transition-colors hover:text-accent"
+            className="press font-display text-lg uppercase tracking-tight text-ink transition-colors hover:text-accent"
           >
             {siteName}
           </button>
@@ -51,7 +53,7 @@ export default function Nav({ siteName }: { siteName: string }) {
               <button
                 key={n.id}
                 onClick={() => go(n.id)}
-                className={`group relative py-1 text-sm uppercase tracking-wide transition-colors ${
+                className={`press group relative py-1 text-sm uppercase tracking-wide transition-colors ${
                   active === n.id
                     ? "text-accent"
                     : "text-ink-soft hover:text-ink"
@@ -71,7 +73,7 @@ export default function Nav({ siteName }: { siteName: string }) {
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="md:hidden flex flex-col gap-1.5 p-2"
+            className="press md:hidden flex flex-col gap-1.5 p-2"
           >
             <span
               className={`block h-px w-5 bg-ink transition-transform ${
@@ -93,7 +95,7 @@ export default function Nav({ siteName }: { siteName: string }) {
             <button
               key={n.id}
               onClick={() => go(n.id)}
-              className={`text-left text-sm ${
+              className={`press text-left text-sm ${
                 active === n.id ? "text-accent" : "text-ink-soft"
               }`}
             >
