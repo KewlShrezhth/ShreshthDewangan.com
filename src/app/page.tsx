@@ -12,11 +12,15 @@ import { getSiteSettings } from "@/lib/content";
 
 export const instant = false;
 
-export default async function Home() {
-  const site = await getSiteSettings();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
+  const [site, { tab }] = await Promise.all([getSiteSettings(), searchParams]);
 
   return (
-    <TabsProvider>
+    <TabsProvider initial={tab}>
       <Nav siteName={site.name} />
       <main>
         <TabPanel id="about">

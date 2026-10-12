@@ -19,11 +19,20 @@ const TabContext = createContext<{
   setActive: (id: SectionId) => void;
 } | null>(null);
 
-export function TabsProvider({ children }: { children: ReactNode }) {
-  const [active, setActiveState] = useState<SectionId>("about");
+export function TabsProvider({
+  initial,
+  children,
+}: {
+  initial?: string;
+  children: ReactNode;
+}) {
+  const [active, setActiveState] = useState<SectionId>(
+    SECTION_IDS.includes(initial as SectionId) ? (initial as SectionId) : "about"
+  );
 
   const setActive = (id: SectionId) => {
     setActiveState(id);
+    window.history.replaceState(null, "", id === "about" ? window.location.pathname : `?tab=${id}`);
     window.scrollTo({ top: 0 });
   };
 
