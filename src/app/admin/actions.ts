@@ -18,7 +18,6 @@ type ListTable =
   | "awards"
   | "music"
   | "movies"
-  | "links"
   | "interests"
   | "education";
 
@@ -28,7 +27,6 @@ const LIST_TABLES: Record<ListTable, { columns: string[]; arrayColumns?: string[
   awards: { columns: ["title", "organization", "year", "description", "image"] },
   music: { columns: ["title", "artist", "artwork", "link", "note"] },
   movies: { columns: ["title", "year", "poster", "rating", "thoughts", "link"] },
-  links: { columns: ["kind", "label", "url"] },
   interests: { columns: ["label"] },
   education: { columns: ["school", "detail"] },
 };

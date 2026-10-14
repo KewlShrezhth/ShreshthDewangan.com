@@ -9,7 +9,6 @@ export const SECTION_IDS = [
   "awards",
   "music",
   "movies",
-  "links",
 ] as const;
 
 export type SectionId = (typeof SECTION_IDS)[number];

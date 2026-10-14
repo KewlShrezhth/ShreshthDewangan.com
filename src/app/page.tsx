@@ -7,7 +7,6 @@ import Photos from "@/components/sections/Photos";
 import Awards from "@/components/sections/Awards";
 import Music from "@/components/sections/Music";
 import Movies from "@/components/sections/Movies";
-import Links from "@/components/sections/Links";
 import { getSiteSettings } from "@/lib/content";
 
 export const instant = false;
@@ -40,9 +39,6 @@ export default async function Home({
         </TabPanel>
         <TabPanel id="movies">
           <Movies />
-        </TabPanel>
-        <TabPanel id="links">
-          <Links />
         </TabPanel>
       </main>
       <Footer siteName={site.name} />

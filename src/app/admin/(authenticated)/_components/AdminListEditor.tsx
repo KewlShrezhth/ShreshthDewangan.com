@@ -65,7 +65,6 @@ export default function AdminListEditor<T extends { id: number }>({
     | "awards"
     | "music"
     | "movies"
-    | "links"
     | "interests"
     | "education";
   title: string;

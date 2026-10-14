@@ -23,7 +23,6 @@ All content lives in the database now, not in code. Edit everything at **`/admin
 - **Awards** — title, organization, year, description, optional image
 - **Music** — title, artist, artwork, link, personal note
 - **Movies** — title, year, poster, rating, thoughts, link
-- **Links** — external links
 
 Changes save straight to the database and appear on the live site immediately — no code, no redeploy.
 

@@ -7,7 +7,6 @@ const sections = [
   { href: "/admin/awards", label: "Awards", desc: "Manage awards and recognition" },
   { href: "/admin/music", label: "Music", desc: "Manage songs and albums" },
   { href: "/admin/movies", label: "Movies", desc: "Manage movies" },
-  { href: "/admin/links", label: "Links", desc: "Manage external links" },
 ];
 
 export default function AdminDashboard() {

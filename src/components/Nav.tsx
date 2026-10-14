@@ -10,7 +10,6 @@ const nav: { id: SectionId; label: string }[] = [
   { id: "awards", label: "Awards" },
   { id: "music", label: "Music" },
   { id: "movies", label: "Movies" },
-  { id: "links", label: "Links" },
 ];
 
 export default function Nav({ siteName }: { siteName: string }) {

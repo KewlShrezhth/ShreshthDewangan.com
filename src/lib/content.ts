@@ -39,7 +39,6 @@ export type Movie = {
   thoughts: string | null;
   link: string | null;
 };
-export type LinkEntry = { id: number; kind: string; label: string; url: string };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
   const { rows } = await pool.query("SELECT name, tagline FROM site_settings WHERE id = 1");
@@ -103,13 +102,6 @@ export async function getMusic(): Promise<MusicEntry[]> {
 export async function getMovies(): Promise<Movie[]> {
   const { rows } = await pool.query(
     "SELECT id, title, year, poster, rating, thoughts, link FROM movies ORDER BY sort_order ASC, id ASC"
-  );
-  return rows;
-}
-
-export async function getLinks(): Promise<LinkEntry[]> {
-  const { rows } = await pool.query(
-    "SELECT id, kind, label, url FROM links ORDER BY sort_order ASC, id ASC"
   );
   return rows;
 }

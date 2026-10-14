@@ -9,7 +9,6 @@ const sections = [
   { href: "/admin/awards", label: "Awards" },
   { href: "/admin/music", label: "Music" },
   { href: "/admin/movies", label: "Movies" },
-  { href: "/admin/links", label: "Links" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
