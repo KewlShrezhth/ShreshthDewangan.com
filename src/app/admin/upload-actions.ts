@@ -1,6 +1,6 @@
 "use server";
 
-import { put, del } from "@vercel/blob";
+import { put } from "@vercel/blob";
 import { requireAdmin } from "@/lib/auth";
 
 const MAX_BYTES = 8 * 1024 * 1024;
@@ -31,10 +31,4 @@ export async function uploadImage(formData: FormData): Promise<{ url: string } |
   });
 
   return { url: blob.url };
-}
-
-export async function deleteUploadedImage(url: string) {
-  await requireAdmin();
-  if (!url.includes(".public.blob.vercel-storage.com/")) return;
-  await del(url).catch(() => {});
 }
