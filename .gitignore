@@ -43,3 +43,6 @@ AGENTS.md
 
 .vercel
 .env*
+
+# session-roles dashboard snapshot
+session-roles-dashboard.json
