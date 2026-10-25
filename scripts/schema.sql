@@ -77,11 +77,3 @@ CREATE TABLE IF NOT EXISTS movies (
   link TEXT,
   sort_order INTEGER NOT NULL DEFAULT 0
 );
-
-CREATE TABLE IF NOT EXISTS links (
-  id SERIAL PRIMARY KEY,
-  kind TEXT NOT NULL DEFAULT 'website',
-  label TEXT NOT NULL,
-  url TEXT NOT NULL,
-  sort_order INTEGER NOT NULL DEFAULT 0
-);

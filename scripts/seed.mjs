@@ -82,14 +82,6 @@ async function main() {
     );
   }
 
-  const { rows: existingLinks } = await pool.query("SELECT 1 FROM links LIMIT 1");
-  if (existingLinks.length === 0) {
-    await pool.query(
-      `INSERT INTO links (kind, label, url, sort_order) VALUES ($1, $2, $3, 0)`,
-      ["github", "GitHub", "https://github.com/your-username"]
-    );
-  }
-
   console.log("Seed complete.");
 }
 
