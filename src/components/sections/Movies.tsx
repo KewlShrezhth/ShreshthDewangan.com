@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
 import { getMovies } from "@/lib/content";
+import { unopt } from "@/lib/image";
 
 export default async function Movies() {
   const movies = await getMovies();
@@ -19,10 +21,13 @@ export default async function Movies() {
               <div className="group">
                 <div className="overflow-hidden rounded-sm shadow-soft transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lift">
                   {movie.poster ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={movie.poster}
                       alt={movie.title}
+                      width={400}
+                      height={600}
+                      sizes="(min-width: 768px) 200px, (min-width: 640px) 33vw, 50vw"
+                      unoptimized={unopt(movie.poster)}
                       className="w-full aspect-[2/3] object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                     />
                   ) : (

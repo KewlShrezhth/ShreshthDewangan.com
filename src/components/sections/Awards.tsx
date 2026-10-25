@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
 import { getAwards } from "@/lib/content";
+import { unopt } from "@/lib/image";
 
 export default async function Awards() {
   const awards = await getAwards();
@@ -18,10 +20,13 @@ export default async function Awards() {
             <Reveal key={award.id} delay={i * 80}>
               <div className="group py-8 border-b border-line flex flex-col sm:flex-row gap-6 sm:items-center transition-all duration-300 hover:px-3 hover:bg-surface/50 hover:shadow-soft rounded-sm">
                 {award.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={award.image}
                     alt={award.title}
+                    width={80}
+                    height={80}
+                    sizes="80px"
+                    unoptimized={unopt(award.image)}
                     className="w-20 h-20 object-cover rounded-sm shrink-0 shadow-soft ring-1 ring-gold/30 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-2"
                   />
                 ) : (

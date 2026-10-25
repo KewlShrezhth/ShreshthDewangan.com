@@ -9,7 +9,9 @@ import {
   type AnimationPlaybackControls,
   type MotionValue,
 } from "motion/react";
+import Image from "next/image";
 import type { Photo } from "@/lib/content";
+import { unopt } from "@/lib/image";
 
 const MIN_FRAMES = 10;
 const HOLD_MS = 3000; // how long each photo faces the viewer before the film rolls on
@@ -52,8 +54,15 @@ function Frame({ photo, angle, rot }: { photo: Photo; angle: number; rot: Motion
     >
       <div className="w-[9%] my-1 mx-[2%] opacity-80" style={sprocketStyle} />
       <div className="relative flex-1 my-[5%] overflow-hidden [backface-visibility:hidden]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={photo.src} alt={photo.alt} draggable={false} className="h-full w-full select-none object-cover" />
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          fill
+          sizes="(min-width: 768px) 220px, 180px"
+          unoptimized={unopt(photo.src)}
+          draggable={false}
+          className="select-none object-cover"
+        />
       </div>
       <div className="w-[9%] my-1 mx-[2%] opacity-80" style={sprocketStyle} />
       <div ref={overlay} aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: 0.8 }} />
@@ -229,10 +238,14 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
             onClick={() => setActiveIndex(i)}
             className="group mb-4 block w-full overflow-hidden rounded-sm shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={photo.src}
               alt={photo.alt}
+              width={800}
+              height={600}
+              sizes="(min-width: 1152px) 370px, (min-width: 768px) 33vw, 50vw"
+              unoptimized={unopt(photo.src)}
+              style={{ height: "auto" }}
               className="w-full h-auto object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
               loading="lazy"
             />
@@ -248,12 +261,15 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           role="dialog"
           aria-modal="true"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             key={active.id}
             src={active.src}
             alt={active.alt}
-            className="animate-scale-in max-h-[85vh] max-w-full rounded-sm object-contain shadow-lift"
+            width={1600}
+            height={1200}
+            sizes="100vw"
+            unoptimized={unopt(active.src)}
+            className="animate-scale-in h-auto w-auto max-h-[85vh] max-w-full rounded-sm object-contain shadow-lift"
             onClick={(e) => e.stopPropagation()}
           />
           {active.caption && (

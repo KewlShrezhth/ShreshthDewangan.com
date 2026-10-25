@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import Placeholder from "@/components/Placeholder";
+import { unopt } from "@/lib/image";
 
 type Track = {
   id: number;
@@ -57,10 +59,13 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
           <button key={t.id} onClick={() => open(i)} className="press group text-left">
             <span className="block overflow-hidden rounded-sm shadow-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lift">
               {t.cover ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={t.cover}
                   alt={t.title}
+                  width={300}
+                  height={300}
+                  sizes="(min-width: 768px) 260px, (min-width: 640px) 33vw, 50vw"
+                  unoptimized={unopt(t.cover)}
                   className="w-full aspect-square object-cover transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3"
                 />
               ) : (
@@ -113,8 +118,15 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
                 />
                 <div className="absolute inset-[31%] overflow-hidden rounded-full ring-4 ring-black/60 bg-gold">
                   {track.cover && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={track.cover} alt="" className="h-full w-full object-cover" />
+                    <Image
+                      src={track.cover}
+                      alt=""
+                      width={180}
+                      height={180}
+                      sizes="180px"
+                      unoptimized={unopt(track.cover)}
+                      className="h-full w-full object-cover"
+                    />
                   )}
                 </div>
                 <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink-soft ring-2 ring-black" />

@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
 import { getProjects } from "@/lib/content";
+import { unopt } from "@/lib/image";
 
 export default async function Projects() {
   const projects = await getProjects();
@@ -19,10 +21,13 @@ export default async function Projects() {
               <article className="py-10 md:py-14 grid grid-cols-1 md:grid-cols-[280px_minmax(0,1fr)] gap-8 md:gap-14 items-start group transition-transform duration-300 md:hover:-translate-y-1">
                 <div className="order-2 md:order-1 overflow-hidden rounded-sm shadow-soft transition-shadow duration-300 group-hover:shadow-lift">
                   {project.images[0] ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={project.images[0]}
                       alt={project.name}
+                      width={560}
+                      height={420}
+                      sizes="(min-width: 768px) 280px, 100vw"
+                      unoptimized={unopt(project.images[0])}
                       className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06] group-hover:-rotate-1"
                     />
                   ) : (

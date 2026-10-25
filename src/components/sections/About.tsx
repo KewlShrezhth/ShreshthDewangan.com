@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
 import GoToTab from "@/components/GoToTab";
 import { getAbout, getEducation, getInterests, getSiteSettings } from "@/lib/content";
+import { unopt } from "@/lib/image";
 
 export default async function About() {
   const [about, interests, education, site] = await Promise.all([
@@ -90,10 +92,14 @@ export default async function About() {
           <Reveal delay={200}>
             <div className="hover-lift rounded-sm bg-paper p-1.5 shadow-soft ring-1 ring-gold/30 hover:shadow-lift">
               {about.profileImage ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={about.profileImage}
                   alt={about.name}
+                  width={560}
+                  height={700}
+                  sizes="(min-width: 768px) 280px, 100vw"
+                  preload
+                  unoptimized={unopt(about.profileImage)}
                   className="w-full aspect-[4/5] object-cover rounded-sm"
                 />
               ) : (

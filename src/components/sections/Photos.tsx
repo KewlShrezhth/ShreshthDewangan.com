@@ -16,7 +16,7 @@ export default async function Photos() {
 
         <Reveal delay={100}>
           {photos.length > 0 ? (
-            <PhotoGallery photos={photos} />
+            <PhotoGallery photos={photos.map((p) => ({ ...p, alt: p.alt || p.caption || "" }))} />
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, i) => (
