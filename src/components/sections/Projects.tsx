@@ -39,7 +39,7 @@ export default async function Projects() {
                 </div>
 
                 <div className="order-1 md:order-2">
-                  <h3 className="font-display text-2xl md:text-3xl text-ink">
+                  <h3 className="font-display uppercase text-2xl md:text-3xl text-ink">
                     {project.name}
                   </h3>
                   <p className="mt-3 text-ink-soft leading-relaxed max-w-2xl">

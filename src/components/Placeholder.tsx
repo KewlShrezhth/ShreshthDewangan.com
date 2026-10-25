@@ -16,7 +16,7 @@ export default function Placeholder({
             "repeating-linear-gradient(135deg, var(--line) 0, var(--line) 1px, transparent 1px, transparent 14px)",
         }}
       />
-      <span className="relative z-10 px-3 text-center font-display text-xs uppercase tracking-widest text-ink-faint">
+      <span className="relative z-10 px-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink-faint">
         {label}
       </span>
     </div>
