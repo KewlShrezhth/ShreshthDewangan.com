@@ -62,7 +62,9 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
         className={`grid gap-x-6 gap-y-10 ${
           tracks.length <= 2
             ? "grid-cols-2 md:grid-cols-2 max-w-md"
-            : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+            : tracks.length === 5
+              ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-5"
+              : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
         }`}
       >
         {tracks.map((t, i) => (
