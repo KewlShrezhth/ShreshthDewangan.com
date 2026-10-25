@@ -59,14 +59,14 @@ export default async function About() {
 
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-10">
               <div>
-                <h3 className="font-display text-sm tracking-widest text-ink-faint uppercase mb-3">
+                <h2 className="font-display text-sm tracking-widest text-ink-faint uppercase mb-3">
                   Interests
-                </h3>
+                </h2>
                 <div className="flex flex-wrap gap-2">
                   {interests.map((item) => (
                     <span
                       key={item.id}
-                      className="rounded-full border border-line px-3 py-1 text-sm text-ink-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-soft/50 hover:text-ink hover:shadow-soft"
+                      className="rounded-full border border-line px-3 py-1 text-sm text-ink-soft"
                     >
                       {item.label}
                     </span>
@@ -74,9 +74,9 @@ export default async function About() {
                 </div>
               </div>
               <div>
-                <h3 className="font-display text-sm tracking-widest text-ink-faint uppercase mb-3">
+                <h2 className="font-display text-sm tracking-widest text-ink-faint uppercase mb-3">
                   Education
-                </h3>
+                </h2>
                 <ul className="space-y-3 text-ink-soft">
                   {education.map((e) => (
                     <li key={e.id}>

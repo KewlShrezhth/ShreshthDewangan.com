@@ -12,6 +12,7 @@ import {
 import Image from "next/image";
 import type { Photo } from "@/lib/content";
 import { unopt } from "@/lib/image";
+import { useModalFocus } from "@/lib/useModalFocus";
 
 const MIN_FRAMES = 10;
 const HOLD_MS = 3000; // how long each photo faces the viewer before the film rolls on
@@ -220,6 +221,9 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   }, [activeIndex, close, next, prev]);
 
   const active = activeIndex !== null ? photos[activeIndex] : null;
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useModalFocus(active !== null, dialogRef, closeRef);
 
   if (view === "reel") return <FilmReel photos={photos} onOpen={() => setView("grid")} />;
 
@@ -260,6 +264,8 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           onClick={close}
           role="dialog"
           aria-modal="true"
+          aria-label="Photo viewer"
+          ref={dialogRef}
         >
           <Image
             key={active.id}
@@ -278,9 +284,10 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
             </p>
           )}
           <button
+            ref={closeRef}
             onClick={close}
             aria-label="Close"
-            className="absolute top-5 right-5 text-ink/80 hover:text-ink text-2xl leading-none transition-transform duration-200 hover:scale-110"
+            className="absolute top-5 right-5 text-ink/80 hover:text-ink text-2xl leading-none transition-transform duration-200 hover:scale-110 focus-visible:ring-2 focus-visible:ring-accent"
           >
             ×
           </button>
@@ -290,7 +297,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
               prev();
             }}
             aria-label="Previous photo"
-            className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 text-ink/70 hover:text-ink text-3xl px-2 transition-transform duration-200 hover:scale-125 hover:-translate-x-0.5"
+            className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 text-ink/70 hover:text-ink text-3xl px-2 transition-transform duration-200 hover:scale-125 hover:-translate-x-0.5 focus-visible:ring-2 focus-visible:ring-accent"
           >
             ‹
           </button>
@@ -300,7 +307,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
               next();
             }}
             aria-label="Next photo"
-            className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 text-ink/70 hover:text-ink text-3xl px-2 transition-transform duration-200 hover:scale-125 hover:translate-x-0.5"
+            className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 text-ink/70 hover:text-ink text-3xl px-2 transition-transform duration-200 hover:scale-125 hover:translate-x-0.5 focus-visible:ring-2 focus-visible:ring-accent"
           >
             ›
           </button>

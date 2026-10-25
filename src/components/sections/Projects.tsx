@@ -18,8 +18,8 @@ export default async function Projects() {
         <div className="divide-y divide-line">
           {projects.map((project, i) => (
             <Reveal key={project.id} delay={i * 80}>
-              <article className="py-10 md:py-14 grid grid-cols-1 md:grid-cols-[280px_minmax(0,1fr)] gap-8 md:gap-14 items-start group transition-transform duration-300 md:hover:-translate-y-1">
-                <div className="order-2 md:order-1 overflow-hidden rounded-sm shadow-soft transition-shadow duration-300 group-hover:shadow-lift">
+              <article className="py-10 md:py-14 grid grid-cols-1 md:grid-cols-[280px_minmax(0,1fr)] gap-8 md:gap-14 items-start">
+                <div className="order-2 md:order-1 overflow-hidden rounded-sm shadow-soft">
                   {project.images[0] ? (
                     <Image
                       src={project.images[0]}
@@ -28,18 +28,18 @@ export default async function Projects() {
                       height={420}
                       sizes="(min-width: 768px) 280px, 100vw"
                       unoptimized={unopt(project.images[0])}
-                      className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06] group-hover:-rotate-1"
+                      className="w-full aspect-[4/3] object-cover"
                     />
                   ) : (
                     <Placeholder
                       label="Project image"
-                      className="w-full aspect-[4/3] transition-transform duration-500 ease-out group-hover:scale-[1.06] group-hover:-rotate-1"
+                      className="w-full aspect-[4/3]"
                     />
                   )}
                 </div>
 
                 <div className="order-1 md:order-2">
-                  <h3 className="font-display text-2xl md:text-3xl text-ink transition-colors duration-300 group-hover:text-accent">
+                  <h3 className="font-display text-2xl md:text-3xl text-ink">
                     {project.name}
                   </h3>
                   <p className="mt-3 text-ink-soft leading-relaxed max-w-2xl">
@@ -50,7 +50,7 @@ export default async function Projects() {
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs tracking-wide uppercase px-2.5 py-1 border border-line text-ink-faint rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:text-accent hover:shadow-soft"
+                        className="text-xs tracking-wide uppercase px-2.5 py-1 border border-line text-ink-faint rounded-full"
                       >
                         {tech}
                       </span>

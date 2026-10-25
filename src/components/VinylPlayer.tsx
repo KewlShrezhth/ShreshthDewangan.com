@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import Placeholder from "@/components/Placeholder";
 import { unopt } from "@/lib/image";
+import { useModalFocus } from "@/lib/useModalFocus";
 
 type Track = {
   id: number;
@@ -22,6 +23,9 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const track = index === null ? null : tracks[index];
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useModalFocus(track !== null, dialogRef, closeRef);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -84,6 +88,7 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
       {/* Portal: the Reveal wrapper's transform would otherwise trap this fixed overlay inside it. */}
       {track && createPortal(
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label={`${track.title} by ${track.artist}`}
@@ -95,6 +100,7 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
             className="animate-scale-in relative grid w-full max-w-4xl grid-cols-1 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-8 md:gap-12 items-center"
           >
             <button
+              ref={closeRef}
               onClick={close}
               aria-label="Close player"
               className="press absolute -top-11 right-0 md:-top-2 md:-right-2 z-10 text-3xl leading-none text-ink/70 hover:text-ink"
@@ -156,7 +162,7 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
                   aria-label={playing ? "Pause" : "Play"}
                   className="press flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-paper text-xl shadow-soft transition-shadow hover:shadow-lift disabled:opacity-40 disabled:shadow-none"
                 >
-                  {playing ? "❚❚" : "▶"}
+                  <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
                 </button>
                 <div className="flex-1">
                   <div className="h-1 w-full overflow-hidden rounded-full bg-line">
