@@ -7,15 +7,22 @@ import { unopt } from "@/lib/image";
 
 export default async function Movies() {
   const movies = await getMovies();
+  if (movies.length === 0) return null;
+  const gridCls =
+    movies.length === 1
+      ? "grid-cols-1 max-w-[12rem]"
+      : movies.length === 2
+        ? "grid-cols-2 max-w-md"
+        : "grid-cols-2 sm:grid-cols-3 md:grid-cols-5";
 
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading title="Movies" note="Films I keep coming back to." />
         </Reveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-6 gap-y-10">
+        <div className={`grid ${gridCls} gap-x-6 gap-y-10`}>
           {movies.map((movie, i) => (
             <Reveal key={movie.id} delay={i * 80}>
               <div className="group">

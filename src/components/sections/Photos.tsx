@@ -1,33 +1,21 @@
 import Reveal from "@/components/Reveal";
-import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
 import PhotoGallery from "./PhotoGallery";
 import { getPhotos } from "@/lib/content";
 
 export default async function Photos() {
   const photos = await getPhotos();
+  if (photos.length === 0) return null;
 
   return (
-    <section className="py-24 md:py-32 overflow-x-clip">
+    <section className="pt-20 md:pt-28 pb-14 md:pb-20 overflow-x-clip">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading title="Photos" note="Moments worth keeping." />
         </Reveal>
 
         <Reveal delay={100}>
-          {photos.length > 0 ? (
-            <PhotoGallery photos={photos.map((p) => ({ ...p, alt: p.alt || p.caption || "" }))} />
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Placeholder
-                  key={i}
-                  label="Photo"
-                  className={`shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift rounded-sm ${i % 3 === 1 ? "aspect-[3/4]" : "aspect-square"}`}
-                />
-              ))}
-            </div>
-          )}
+          <PhotoGallery photos={photos.map((p) => ({ ...p, alt: p.alt || p.caption || "" }))} />
         </Reveal>
       </div>
     </section>

@@ -7,9 +7,10 @@ import { unopt } from "@/lib/image";
 
 export default async function Awards() {
   const awards = await getAwards();
+  if (awards.length === 0) return null;
 
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading title="Awards" note="Recognition along the way." />

@@ -7,9 +7,10 @@ import { unopt } from "@/lib/image";
 
 export default async function Projects() {
   const projects = await getProjects();
+  if (projects.length === 0) return null;
 
   return (
-    <section className="py-24 md:py-32">
+    <section className="pt-20 md:pt-28 pb-14 md:pb-20">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading title="Projects" note="A few things I've built." />

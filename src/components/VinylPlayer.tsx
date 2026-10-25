@@ -58,7 +58,13 @@ export default function VinylPlayer({ tracks }: { tracks: Track[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-10">
+      <div
+        className={`grid gap-x-6 gap-y-10 ${
+          tracks.length <= 2
+            ? "grid-cols-2 md:grid-cols-2 max-w-md"
+            : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+        }`}
+      >
         {tracks.map((t, i) => (
           <button key={t.id} onClick={() => open(i)} className="press group text-left">
             <span className="block overflow-hidden rounded-sm shadow-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lift">

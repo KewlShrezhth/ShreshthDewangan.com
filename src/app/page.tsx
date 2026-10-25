@@ -7,7 +7,15 @@ import Photos from "@/components/sections/Photos";
 import Awards from "@/components/sections/Awards";
 import Music from "@/components/sections/Music";
 import Movies from "@/components/sections/Movies";
-import { getSiteSettings } from "@/lib/content";
+import {
+  getSiteSettings,
+  getAbout,
+  getProjects,
+  getAwards,
+  getPhotos,
+  getMusic,
+  getMovies,
+} from "@/lib/content";
 
 export const instant = false;
 
@@ -16,7 +24,20 @@ export default async function Home({
 }: {
   searchParams: Promise<{ tab?: string }>;
 }) {
-  const [site, { tab }] = await Promise.all([getSiteSettings(), searchParams]);
+  const [site, about, projects, awards, photos, music, movies, { tab }] =
+    await Promise.all([
+      getSiteSettings(),
+      getAbout(),
+      getProjects(),
+      getAwards(),
+      getPhotos(),
+      getMusic(),
+      getMovies(),
+      searchParams,
+    ]);
+  const soon = (
+    <p className="px-6 py-20 text-center text-ink-faint">Coming soon.</p>
+  );
 
   return (
     <TabsProvider initial={tab}>
@@ -27,6 +48,7 @@ export default async function Home({
         </TabPanel>
         <TabPanel id="work">
           <h1 className="sr-only">Work</h1>
+          {projects.length + awards.length === 0 && soon}
           <div id="projects" className="scroll-mt-20">
             <Projects />
           </div>
@@ -36,6 +58,7 @@ export default async function Home({
         </TabPanel>
         <TabPanel id="life">
           <h1 className="sr-only">Life</h1>
+          {photos.length + music.length + movies.length === 0 && soon}
           <div id="photos" className="scroll-mt-20">
             <Photos />
           </div>
@@ -47,7 +70,7 @@ export default async function Home({
           </div>
         </TabPanel>
       </main>
-      <Footer siteName={site.name} />
+      <Footer siteName={site.name} email={about.email} linkedin={about.linkedin} />
     </TabsProvider>
   );
 }

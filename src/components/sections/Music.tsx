@@ -6,6 +6,7 @@ import { findTrack } from "@/lib/itunes";
 
 export default async function Music() {
   const music = await getMusic();
+  if (music.length === 0) return null;
   const lookups = await Promise.all(music.map((m) => findTrack(m.title, m.artist)));
 
   const tracks = music.map((m, i) => ({
@@ -19,7 +20,7 @@ export default async function Music() {
   }));
 
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
           <SectionHeading title="Music" note="On repeat lately." />
