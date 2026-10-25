@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const GUILLOCHE_SVG = `<svg xmlns='http://www.w3.org/2000/svg' width='55' height='55'>
-  <g fill='none' stroke='#e2b84a' stroke-width='0.6'>
+  <g fill='none' stroke='#e2b84a' stroke-width='0.4'>
     <circle cx='27.5' cy='27.5' r='26' stroke-opacity='0.55'/>
     <circle cx='27.5' cy='27.5' r='18' stroke-opacity='0.45' stroke-width='0.5'/>
     <circle cx='27.5' cy='27.5' r='9' stroke-opacity='0.35' stroke-width='0.5'/>
