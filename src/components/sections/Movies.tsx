@@ -12,7 +12,7 @@ export default async function Movies() {
     <section className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
-          <SectionHeading index="05" title="Movies" note="Films I keep coming back to." />
+          <SectionHeading title="Movies" note="Films I keep coming back to." />
         </Reveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-6 gap-y-10">

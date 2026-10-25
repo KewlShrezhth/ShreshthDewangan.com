@@ -22,7 +22,7 @@ export default async function Music() {
     <section className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
-          <SectionHeading index="04" title="Music" note="On repeat lately." />
+          <SectionHeading title="Music" note="On repeat lately." />
         </Reveal>
 
         {tracks.length > 0 && (

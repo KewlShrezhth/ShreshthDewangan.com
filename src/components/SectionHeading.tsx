@@ -3,15 +3,17 @@ export default function SectionHeading({
   title,
   note,
 }: {
-  index: string;
+  index?: string;
   title: string;
   note?: string;
 }) {
   return (
     <div className="mb-10 md:mb-14 flex items-center gap-4">
-      <span className="font-display rounded-sm bg-gold px-2 py-1 text-sm text-paper tracking-widest">
-        {index}
-      </span>
+      {index && (
+        <span className="font-display rounded-sm bg-gold px-2 py-1 text-sm text-paper tracking-widest">
+          {index}
+        </span>
+      )}
       <div>
         <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight text-ink">
           {title}

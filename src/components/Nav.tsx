@@ -5,11 +5,8 @@ import { useTabs, type SectionId } from "@/components/Tabs";
 
 const nav: { id: SectionId; label: string }[] = [
   { id: "about", label: "About" },
-  { id: "projects", label: "Projects" },
-  { id: "photos", label: "Photos" },
-  { id: "awards", label: "Awards" },
-  { id: "music", label: "Music" },
-  { id: "movies", label: "Movies" },
+  { id: "work", label: "Work" },
+  { id: "life", label: "Life" },
 ];
 
 export default function Nav({ siteName }: { siteName: string }) {

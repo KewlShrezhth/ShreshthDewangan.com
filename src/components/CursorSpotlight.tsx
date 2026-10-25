@@ -49,7 +49,7 @@ export default function CursorSpotlight() {
     <div
       ref={ref}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 opacity-70"
+      className="pointer-events-none fixed inset-0 z-0 opacity-40"
       style={{
         backgroundImage: PATTERN_URL,
         maskImage:

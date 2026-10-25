@@ -11,7 +11,7 @@ export default async function Photos() {
     <section className="py-24 md:py-32 overflow-x-clip">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
-          <SectionHeading index="02" title="Photos" note="Moments worth keeping." />
+          <SectionHeading title="Photos" note="Moments worth keeping." />
         </Reveal>
 
         <Reveal delay={100}>

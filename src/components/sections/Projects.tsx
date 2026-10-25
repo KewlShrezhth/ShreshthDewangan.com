@@ -12,7 +12,7 @@ export default async function Projects() {
     <section className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
-          <SectionHeading index="01" title="Projects" note="A few things I've built." />
+          <SectionHeading title="Projects" note="A few things I've built." />
         </Reveal>
 
         <div className="divide-y divide-line">

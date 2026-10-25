@@ -12,7 +12,7 @@ export default async function Awards() {
     <section className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
-          <SectionHeading index="03" title="Awards" note="Recognition along the way." />
+          <SectionHeading title="Awards" note="Recognition along the way." />
         </Reveal>
 
         <div className="space-y-0 border-t border-line">

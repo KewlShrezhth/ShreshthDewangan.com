@@ -17,12 +17,12 @@ export default async function About() {
     <section className="relative overflow-hidden pt-20 md:pt-28 pb-24 md:pb-32">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-25 blur-3xl animate-float-slow"
+        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-25 blur-3xl"
         style={{ background: "var(--accent)" }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-32 -left-32 h-80 w-80 rounded-full opacity-[0.15] blur-3xl animate-float-slower"
+        className="pointer-events-none absolute top-32 -left-32 h-80 w-80 rounded-full opacity-[0.15] blur-3xl"
         style={{ background: "var(--accent)" }}
       />
 
@@ -39,7 +39,7 @@ export default async function About() {
           </p>
 
           <GoToTab
-            id="projects"
+            id="work"
             className="press hover-lift group mt-8 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-paper shadow-soft hover:shadow-lift"
           >
             See my work

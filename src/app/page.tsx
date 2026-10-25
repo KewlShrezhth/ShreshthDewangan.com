@@ -25,20 +25,26 @@ export default async function Home({
         <TabPanel id="about">
           <About />
         </TabPanel>
-        <TabPanel id="projects">
-          <Projects />
+        <TabPanel id="work">
+          <h1 className="sr-only">Work</h1>
+          <div id="projects" className="scroll-mt-20">
+            <Projects />
+          </div>
+          <div id="awards" className="scroll-mt-20">
+            <Awards />
+          </div>
         </TabPanel>
-        <TabPanel id="photos">
-          <Photos />
-        </TabPanel>
-        <TabPanel id="awards">
-          <Awards />
-        </TabPanel>
-        <TabPanel id="music">
-          <Music />
-        </TabPanel>
-        <TabPanel id="movies">
-          <Movies />
+        <TabPanel id="life">
+          <h1 className="sr-only">Life</h1>
+          <div id="photos" className="scroll-mt-20">
+            <Photos />
+          </div>
+          <div id="music" className="scroll-mt-20">
+            <Music />
+          </div>
+          <div id="movies" className="scroll-mt-20">
+            <Movies />
+          </div>
         </TabPanel>
       </main>
       <Footer siteName={site.name} />
