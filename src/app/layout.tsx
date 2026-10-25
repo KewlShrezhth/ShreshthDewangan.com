@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anton, Inter } from "next/font/google";
+import { getSiteName } from "@/lib/content";
 import CursorSpotlight from "@/components/CursorSpotlight";
 import "./globals.css";
 
@@ -14,10 +15,23 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Your Name — Personal Site",
-  description: "Personal site — projects, photos, awards, and the things I like.",
-};
+const FALLBACK_NAME = "Shreshth Dewangan";
+
+export async function generateMetadata(): Promise<Metadata> {
+  let name = FALLBACK_NAME;
+  try {
+    const siteName = await getSiteName();
+    if (siteName && siteName !== "Your Name") name = siteName;
+  } catch {}
+  const description = "Shreshth Dewangan — projects, awards and the things I love.";
+  return {
+    metadataBase: new URL("https://shreshthdewangan.com"),
+    title: { default: name, template: "%s | " + name },
+    description,
+    openGraph: { type: "website", siteName: name, title: name, description, url: "/" },
+    twitter: { card: "summary_large_image", title: name, description },
+  };
+}
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

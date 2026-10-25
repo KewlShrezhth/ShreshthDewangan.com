@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import { pool } from "@/lib/db";
 
 export type SiteSettings = { name: string; tagline: string };
@@ -104,4 +105,11 @@ export async function getMovies(): Promise<Movie[]> {
     "SELECT id, title, year, poster, rating, thoughts, link FROM movies ORDER BY sort_order ASC, id ASC"
   );
   return rows;
+}
+
+export async function getSiteName(): Promise<string> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("site");
+  return (await getSiteSettings()).name;
 }

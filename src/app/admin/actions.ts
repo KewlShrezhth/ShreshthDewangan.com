@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { pool } from "@/lib/db";
 import { requireAdmin, SESSION_COOKIE } from "@/lib/auth";
 
@@ -102,6 +102,7 @@ export async function updateSiteSettings(formData: FormData) {
     [name, tagline]
   );
 
+  revalidateTag("site", "max");
   revalidatePath("/");
   revalidatePath("/admin/profile");
 }
