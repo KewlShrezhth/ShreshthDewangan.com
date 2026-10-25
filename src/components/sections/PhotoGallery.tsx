@@ -193,7 +193,7 @@ function FilmReel({ photos, onOpen }: { photos: Photo[]; onOpen: () => void }) {
 }
 
 export default function PhotoGallery({ photos }: { photos: Photo[] }) {
-  const [view, setView] = useState<"reel" | "grid">("reel");
+  const [view, setView] = useState<"reel" | "grid">("grid");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const close = useCallback(() => setActiveIndex(null), []);
@@ -225,16 +225,36 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   useModalFocus(active !== null, dialogRef, closeRef);
 
-  if (view === "reel") return <FilmReel photos={photos} onOpen={() => setView("grid")} />;
+  if (view === "reel")
+    return (
+      <div key="reel" className="animate-scale-in">
+        <FilmReel photos={photos} onOpen={() => setView("grid")} />
+      </div>
+    );
 
   return (
     <>
-      <button
-        onClick={() => setView("reel")}
-        className="press mb-6 text-sm uppercase tracking-wide text-ink-soft transition-colors hover:text-accent"
-      >
-        ← Back to film roll
-      </button>
+      <div className="mb-6 flex justify-end">
+        <button
+          type="button"
+          aria-label="Secret: film reel view"
+          onClick={() => setView("reel")}
+          className="rounded-sm text-ink-faint/40 hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            aria-hidden="true"
+          >
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="M7 4v16M17 4v16M3 8h4M3 12h4M3 16h4M17 8h4M17 12h4M17 16h4" />
+          </svg>
+        </button>
+      </div>
       <div className="animate-fade-in columns-2 md:columns-3 gap-4 [column-fill:_balance]">
         {photos.map((photo, i) => (
           <button
