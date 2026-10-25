@@ -34,10 +34,19 @@ Required in `.env.local` locally and in your Vercel project's environment variab
 
 - `DATABASE_URL` — Postgres connection string (from the Vercel/Neon integration)
 - `ADMIN_PASSWORD` — the password for `/admin`
-- `ADMIN_SESSION_SECRET` — a long random string used to sign the admin session cookie
+- `ADMIN_SESSION_SECRET` — a long random string used as the HMAC key that signs the admin session token (the secret itself is never put in the cookie)
 - `BLOB_READ_WRITE_TOKEN` — from a **public** Vercel Blob store (image uploads need public read access; private stores won't work for this)
+
+## Admin sessions
+
+- Logging in sets a signed session token in the `admin_session` cookie. It expires after 7 days.
+- Changing `ADMIN_SESSION_SECRET` logs out every session at once. That is the only way to end sessions early.
+- Logging out only clears the cookie in that browser.
+- Login is limited to 5 failed attempts per IP address per 15 minutes, tracked in the `login_attempts` table. Each failed attempt also waits 1 second.
+- After deploying this, the site owner must run `npm run db:migrate` once against the production `DATABASE_URL` so the `login_attempts` table exists. Until then login still works, but only the 1-second delay slows down guessing.
 
 ## Database scripts
 
 - `npm run db:migrate` — creates/updates tables from `scripts/schema.sql`. Safe to re-run.
 - `npm run db:seed` — inserts placeholder rows, but only into empty tables. Safe to re-run.
+- `npm run test:session` — checks that session tokens verify when valid and fail when tampered with or expired. Needs no database.

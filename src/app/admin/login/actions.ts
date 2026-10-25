@@ -1,8 +1,33 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { createHash, timingSafeEqual } from "node:crypto";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { SESSION_COOKIE } from "@/lib/auth";
+import { pool } from "@/lib/db";
+import { SESSION_COOKIE, SESSION_MAX_AGE_SECONDS, createSessionToken } from "@/lib/auth";
+
+const MAX_FAILED_ATTEMPTS = 5;
+const FAILURE_DELAY_MS = 1000;
+
+function sha256(value: string): Buffer {
+  return createHash("sha256").update(value).digest();
+}
+
+async function getClientIp(): Promise<string> {
+  const h = await headers();
+  const forwarded = h.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return forwarded || h.get("x-real-ip")?.trim() || "unknown";
+}
+
+// DB errors are logged and ignored (fail open) so a missing table can never lock the owner out.
+async function safeQuery<T>(label: string, run: () => Promise<T>): Promise<T | undefined> {
+  try {
+    return await run();
+  } catch (error) {
+    console.error(`login_attempts ${label} failed:`, error);
+    return undefined;
+  }
+}
 
 export async function login(_prevState: string | undefined, formData: FormData) {
   const password = formData.get("password");
@@ -11,22 +36,44 @@ export async function login(_prevState: string | undefined, formData: FormData) 
     return "Enter your password.";
   }
 
-  if (password !== process.env.ADMIN_PASSWORD) {
-    return "Incorrect password.";
-  }
-
   const secret = process.env.ADMIN_SESSION_SECRET;
-  if (!secret) {
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!secret || !adminPassword) {
     return "Server is missing ADMIN_SESSION_SECRET.";
   }
 
+  const ip = await getClientIp();
+
+  const failures = await safeQuery("count", async () => {
+    const { rows } = await pool.query(
+      `SELECT COUNT(*)::int AS n FROM login_attempts
+       WHERE ip = $1 AND attempted_at > now() - interval '15 minutes'`,
+      [ip]
+    );
+    return rows[0].n as number;
+  });
+  if ((failures ?? 0) >= MAX_FAILED_ATTEMPTS) {
+    return "Too many attempts. Try again in 15 minutes.";
+  }
+
+  if (!timingSafeEqual(sha256(password), sha256(adminPassword))) {
+    await safeQuery("insert", () => pool.query("INSERT INTO login_attempts (ip) VALUES ($1)", [ip]));
+    await safeQuery("cleanup", () =>
+      pool.query("DELETE FROM login_attempts WHERE attempted_at < now() - interval '1 day'")
+    );
+    await new Promise((resolve) => setTimeout(resolve, FAILURE_DELAY_MS));
+    return "Incorrect password.";
+  }
+
+  await safeQuery("reset", () => pool.query("DELETE FROM login_attempts WHERE ip = $1", [ip]));
+
   const store = await cookies();
-  store.set(SESSION_COOKIE, secret, {
+  store.set(SESSION_COOKIE, await createSessionToken(secret), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: SESSION_MAX_AGE_SECONDS,
   });
 
   redirect("/admin");

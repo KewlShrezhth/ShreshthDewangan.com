@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
-    "db:seed": "node --env-file=.env.local scripts/seed.mjs"
+    "db:seed": "node --env-file=.env.local scripts/seed.mjs",
+    "test:session": "node --experimental-strip-types scripts/check-session-token.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",

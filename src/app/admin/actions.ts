@@ -31,6 +31,13 @@ const LIST_TABLES: Record<ListTable, { columns: string[]; arrayColumns?: string[
   education: { columns: ["school", "detail"] },
 };
 
+function getTableConfig(table: unknown) {
+  if (typeof table !== "string" || !Object.hasOwn(LIST_TABLES, table)) {
+    throw new Error("Unknown table");
+  }
+  return LIST_TABLES[table as ListTable];
+}
+
 function readField(formData: FormData, table: ListTable, column: string): string | string[] {
   const config = LIST_TABLES[table];
   const raw = formData.get(column);
@@ -48,7 +55,7 @@ function readField(formData: FormData, table: ListTable, column: string): string
 
 export async function createListItem(table: ListTable, formData: FormData) {
   await requireAdmin();
-  const config = LIST_TABLES[table];
+  const config = getTableConfig(table);
 
   const values = config.columns.map((col) => readField(formData, table, col));
   const { rows } = await pool.query(
@@ -70,7 +77,8 @@ export async function createListItem(table: ListTable, formData: FormData) {
 
 export async function updateListItem(table: ListTable, id: number, formData: FormData) {
   await requireAdmin();
-  const config = LIST_TABLES[table];
+  const config = getTableConfig(table);
+  if (!Number.isInteger(id)) throw new Error("Invalid id");
 
   const values = config.columns.map((col) => readField(formData, table, col));
   const setClause = config.columns.map((col, i) => `${col} = $${i + 1}`).join(", ");
@@ -86,6 +94,8 @@ export async function updateListItem(table: ListTable, id: number, formData: For
 
 export async function deleteListItem(table: ListTable, id: number) {
   await requireAdmin();
+  getTableConfig(table);
+  if (!Number.isInteger(id)) throw new Error("Invalid id");
   await pool.query(`DELETE FROM ${table} WHERE id = $1`, [id]);
   revalidatePath("/");
   revalidatePath(`/admin/${table}`);

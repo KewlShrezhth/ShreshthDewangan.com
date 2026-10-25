@@ -77,3 +77,12 @@ CREATE TABLE IF NOT EXISTS movies (
   link TEXT,
   sort_order INTEGER NOT NULL DEFAULT 0
 );
+
+-- Failed admin login attempts, used to rate-limit login per IP
+CREATE TABLE IF NOT EXISTS login_attempts (
+  id SERIAL PRIMARY KEY,
+  ip TEXT NOT NULL,
+  attempted_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS login_attempts_ip_time ON login_attempts (ip, attempted_at);
