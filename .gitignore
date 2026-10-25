@@ -46,3 +46,6 @@ AGENTS.md
 
 # session-roles dashboard snapshot
 session-roles-dashboard.json
+
+# security test report (lists weaknesses; keep local)
+SECURITY-REPORT.md
