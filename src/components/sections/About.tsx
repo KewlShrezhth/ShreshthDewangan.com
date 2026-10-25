@@ -25,7 +25,7 @@ export default async function About() {
       />
 
       <div className="relative mx-auto max-w-6xl px-6 md:px-10">
-        <Reveal>
+        <div>
           <p className="font-display text-sm text-accent tracking-[0.2em] mb-5">
             Hello, I&rsquo;m
           </p>
@@ -45,7 +45,7 @@ export default async function About() {
               ↓
             </span>
           </GoToTab>
-        </Reveal>
+        </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_280px] gap-12 md:gap-16 items-start">
           <Reveal delay={100}>
