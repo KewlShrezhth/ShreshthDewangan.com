@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { pool } from "@/lib/db";
 import { requireAdmin, SESSION_COOKIE } from "@/lib/auth";
+import { normalizeLinkUrl } from "@/lib/normalize-url";
 
 export async function logout() {
   const store = await cookies();
@@ -21,12 +22,12 @@ type ListTable =
   | "interests"
   | "education";
 
-const LIST_TABLES: Record<ListTable, { columns: string[]; arrayColumns?: string[] }> = {
-  projects: { columns: ["name", "description", "stack", "images", "github", "live"], arrayColumns: ["stack", "images"] },
+const LIST_TABLES: Record<ListTable, { columns: string[]; arrayColumns?: string[]; urlColumns?: string[] }> = {
+  projects: { columns: ["name", "description", "stack", "images", "github", "live"], arrayColumns: ["stack", "images"], urlColumns: ["github", "live"] },
   photos: { columns: ["src", "alt", "caption"] },
   awards: { columns: ["title", "organization", "year", "description", "image"] },
-  music: { columns: ["title", "artist", "artwork", "link", "note"] },
-  movies: { columns: ["title", "year", "poster", "rating", "thoughts", "link"] },
+  music: { columns: ["title", "artist", "artwork", "link", "note"], urlColumns: ["link"] },
+  movies: { columns: ["title", "year", "poster", "rating", "thoughts", "link"], urlColumns: ["link"] },
   interests: { columns: ["label"] },
   education: { columns: ["school", "detail"] },
 };
@@ -48,6 +49,10 @@ function readField(formData: FormData, table: ListTable, column: string): string
       .split("\n")
       .map((line) => line.trim())
       .filter((line) => line.length > 0);
+  }
+
+  if (config.urlColumns?.includes(column)) {
+    return normalizeLinkUrl(value);
   }
 
   return value.trim();
