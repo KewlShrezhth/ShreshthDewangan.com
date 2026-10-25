@@ -122,11 +122,20 @@ export async function updateAbout(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const intro = String(formData.get("intro") ?? "").trim();
   const profileImage = String(formData.get("profileImage") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const linkedin = String(formData.get("linkedin") ?? "").trim();
+
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new Error("Contact email is not a valid email address");
+  }
+  if (linkedin && !/^https:\/\/(www\.)?linkedin\.com\//i.test(linkedin)) {
+    throw new Error("LinkedIn URL must start with https://www.linkedin.com/");
+  }
 
   await pool.query(
-    `INSERT INTO about (id, name, intro, profile_image) VALUES (1, $1, $2, $3)
-     ON CONFLICT (id) DO UPDATE SET name = $1, intro = $2, profile_image = $3`,
-    [name, intro, profileImage || null]
+    `INSERT INTO about (id, name, intro, profile_image, email, linkedin) VALUES (1, $1, $2, $3, $4, $5)
+     ON CONFLICT (id) DO UPDATE SET name = $1, intro = $2, profile_image = $3, email = $4, linkedin = $5`,
+    [name, intro, profileImage || null, email || null, linkedin || null]
   );
 
   revalidatePath("/");

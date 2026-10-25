@@ -2,7 +2,10 @@ import { cacheLife, cacheTag } from "next/cache";
 import { pool } from "@/lib/db";
 
 export type SiteSettings = { name: string; tagline: string };
-export type About = { name: string; intro: string[]; profileImage: string | null };
+export type About = { name: string; intro: string[]; profileImage: string | null;
+  email: string | null;
+  linkedin: string | null;
+};
 export type Interest = { id: number; label: string };
 export type Education = { id: number; school: string; detail: string };
 export type Project = {
@@ -48,13 +51,15 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
 export async function getAbout(): Promise<About> {
   const { rows } = await pool.query(
-    "SELECT name, intro, profile_image AS \"profileImage\" FROM about WHERE id = 1"
+    "SELECT name, intro, profile_image AS \"profileImage\", email, linkedin FROM about WHERE id = 1"
   );
-  const row = rows[0] ?? { name: "Your Name", intro: "", profileImage: null };
+  const row = rows[0] ?? { name: "Your Name", intro: "", profileImage: null, email: null, linkedin: null };
   return {
     name: row.name,
     intro: row.intro ? row.intro.split("\n\n") : [],
     profileImage: row.profileImage,
+    email: row.email ?? null,
+    linkedin: row.linkedin ?? null,
   };
 }
 

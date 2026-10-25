@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS about (
   profile_image TEXT,
   CONSTRAINT about_singleton CHECK (id = 1)
 );
+ALTER TABLE about ADD COLUMN IF NOT EXISTS email TEXT;
+ALTER TABLE about ADD COLUMN IF NOT EXISTS linkedin TEXT;
 
 -- Repeatable list tables, all with a sort_order for display order
 CREATE TABLE IF NOT EXISTS interests (

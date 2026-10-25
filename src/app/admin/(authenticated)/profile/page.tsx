@@ -73,6 +73,18 @@ export default async function AdminProfilePage() {
             </label>
             <ImageUploadField name="profileImage" defaultValue={about.profileImage ?? ""} />
           </div>
+          <div>
+            <label className="block text-xs uppercase tracking-wide text-ink-faint mb-1.5">
+              Contact email (optional, public)
+            </label>
+            <input type="email" name="email" defaultValue={about.email ?? ""} className={inputClass} />
+          </div>
+          <div>
+            <label className="block text-xs uppercase tracking-wide text-ink-faint mb-1.5">
+              LinkedIn URL (optional, public)
+            </label>
+            <input type="url" name="linkedin" defaultValue={about.linkedin ?? ""} className={inputClass} />
+          </div>
         </div>
         <SubmitButton
           pendingLabel="Saving…"

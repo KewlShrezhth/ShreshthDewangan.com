@@ -47,6 +47,14 @@ export default async function About() {
               ↓
             </span>
           </GoToTab>
+          {(about.email || about.linkedin) && (
+            <a
+              href="#contact"
+              className="press hover-lift mt-8 ml-3 inline-flex items-center rounded-sm border border-accent px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-accent"
+            >
+              Contact
+            </a>
+          )}
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_280px] gap-12 md:gap-16 items-start">
@@ -87,6 +95,31 @@ export default async function About() {
                 </ul>
               </div>
             </div>
+
+            {(about.email || about.linkedin) && (
+              <div id="contact" className="mt-12 scroll-mt-24">
+                <h2 className="font-display text-sm tracking-widest text-ink-faint uppercase mb-3">
+                  Contact
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {about.email && (
+                    <a href={`mailto:${about.email}`} className="rounded-full border border-line px-3 py-1 text-sm text-ink-soft transition-colors hover:border-accent/40 hover:text-accent">
+                      {about.email}
+                    </a>
+                  )}
+                  {about.linkedin && (
+                    <a
+                      href={about.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-line px-3 py-1 text-sm text-ink-soft transition-colors hover:border-accent/40 hover:text-accent"
+                    >
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </Reveal>
 
           <Reveal delay={200}>
