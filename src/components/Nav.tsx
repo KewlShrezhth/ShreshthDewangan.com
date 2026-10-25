@@ -1,16 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTabs, type SectionId } from "@/components/Tabs";
+import { useActiveSection, scrollToId, type SectionId } from "@/components/ScrollSpy";
 
-const nav: { id: SectionId; label: string }[] = [
-  { id: "about", label: "About" },
-  { id: "work", label: "Work" },
-  { id: "life", label: "Life" },
-];
-
-export default function Nav({ siteName }: { siteName: string }) {
-  const { active, setActive } = useTabs();
+export default function Nav({
+  siteName,
+  hasWork = true,
+  hasLife = true,
+}: {
+  siteName: string;
+  hasWork?: boolean;
+  hasLife?: boolean;
+}) {
+  const active = useActiveSection();
+  const nav: { id: SectionId; label: string }[] = [
+    { id: "about", label: "About" },
+    ...(hasWork ? [{ id: "work" as const, label: "Work" }] : []),
+    ...(hasLife ? [{ id: "life" as const, label: "Life" }] : []),
+  ];
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,8 +29,8 @@ export default function Nav({ siteName }: { siteName: string }) {
   }, []);
 
   const go = (id: SectionId) => {
-    setActive(id);
     setOpen(false);
+    requestAnimationFrame(() => requestAnimationFrame(() => scrollToId(id)));
   };
 
   return (

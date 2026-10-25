@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Placeholder from "@/components/Placeholder";
-import GoToTab from "@/components/GoToTab";
 import { getAbout, getEducation, getInterests, getSiteSettings } from "@/lib/content";
 import { unopt } from "@/lib/image";
 
@@ -42,15 +41,15 @@ export default async function About() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <GoToTab
-                id="work"
+              <a
+                href="#work"
                 className="press hover-lift group inline-flex items-center gap-2 rounded-sm border border-accent px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-accent hover:bg-accent hover:text-paper"
               >
                 See my work
                 <span className="transition-transform duration-300 group-hover:translate-y-0.5">
                   ↓
                 </span>
-              </GoToTab>
+              </a>
               {(about.email || about.linkedin) && (
                 <a
                   href="#contact"
