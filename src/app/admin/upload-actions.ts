@@ -4,7 +4,13 @@ import { put } from "@vercel/blob";
 import { requireAdmin } from "@/lib/auth";
 
 const MAX_BYTES = 8 * 1024 * 1024;
-const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"]);
+const ALLOWED_TYPES: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/gif": "gif",
+  "image/avif": "avif",
+};
 
 export async function uploadImage(formData: FormData): Promise<{ url: string } | { error: string }> {
   await requireAdmin();
@@ -14,7 +20,7 @@ export async function uploadImage(formData: FormData): Promise<{ url: string } |
     return { error: "No file selected." };
   }
 
-  if (!ALLOWED_TYPES.has(file.type)) {
+  if (!Object.hasOwn(ALLOWED_TYPES, file.type)) {
     return { error: "Please choose a JPEG, PNG, WebP, GIF, or AVIF image." };
   }
 
@@ -22,12 +28,13 @@ export async function uploadImage(formData: FormData): Promise<{ url: string } |
     return { error: "Image is too large (max 8MB)." };
   }
 
-  const ext = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
+  const ext = ALLOWED_TYPES[file.type];
   const key = `uploads/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
   const blob = await put(key, file, {
     access: "public",
     addRandomSuffix: false,
+    contentType: file.type,
   });
 
   return { url: blob.url };

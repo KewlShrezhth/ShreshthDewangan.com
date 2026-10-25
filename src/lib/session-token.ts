@@ -1,7 +1,8 @@
 // Signed, expiring admin session token: `<expiryMs>.<base64url HMAC-SHA256(expiryMs)>`.
 // Uses only Web Crypto so it runs in the proxy, in Node, and under plain type-stripping.
 
-export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24;
+export const MIN_SECRET_LENGTH = 32;
 
 const encoder = new TextEncoder();
 
@@ -30,6 +31,7 @@ function importKey(secret: string): Promise<CryptoKey> {
 }
 
 export async function createSessionToken(secret: string, now: number = Date.now()): Promise<string> {
+  if (secret.length < MIN_SECRET_LENGTH) throw new Error("Session secret is too short.");
   const exp = String(now + SESSION_MAX_AGE_SECONDS * 1000);
   const key = await importKey(secret);
   const sig = await crypto.subtle.sign("HMAC", key, encoder.encode(exp));
@@ -41,7 +43,7 @@ export async function verifySessionToken(
   secret: string | undefined,
   now: number = Date.now()
 ): Promise<boolean> {
-  if (!token || !secret) return false;
+  if (!token || !secret || secret.length < MIN_SECRET_LENGTH) return false;
   const parts = token.split(".");
   if (parts.length !== 2) return false;
   const [exp, sig] = parts;

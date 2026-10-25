@@ -1,4 +1,8 @@
+import { Suspense } from "react";
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { SESSION_COOKIE, isValidSession } from "@/lib/auth";
 import { logout } from "../actions";
 
 const sections = [
@@ -10,6 +14,12 @@ const sections = [
   { href: "/admin/music", label: "Music" },
   { href: "/admin/movies", label: "Movies" },
 ];
+
+async function AdminGate({ children }: { children: React.ReactNode }) {
+  const store = await cookies();
+  if (!(await isValidSession(store.get(SESSION_COOKIE)?.value))) redirect("/admin/login");
+  return children;
+}
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -37,7 +47,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </form>
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
+      <main className="mx-auto max-w-5xl px-6 py-10">
+        <Suspense>
+          <AdminGate>{children}</AdminGate>
+        </Suspense>
+      </main>
     </div>
   );
 }

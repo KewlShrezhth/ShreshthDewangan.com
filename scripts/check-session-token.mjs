@@ -15,6 +15,7 @@ assert.equal(await verifySessionToken(`${exp}.${flipped}`, secret, now), false, 
 assert.equal(await verifySessionToken(`${Number(exp) + 1}.${sig}`, secret, now), false, "altered exp fails");
 assert.equal(await verifySessionToken(token, secret, Number(exp) + 1), false, "expired token fails");
 assert.equal(await verifySessionToken(token, "wrong-secret", now), false, "wrong secret fails");
+assert.equal(await verifySessionToken(token, "short", now), false, "short secret fails");
 assert.equal(await verifySessionToken(undefined, secret, now), false, "undefined fails");
 assert.equal(await verifySessionToken("", secret, now), false, "empty fails");
 assert.equal(await verifySessionToken("garbage", secret, now), false, "garbage fails");
