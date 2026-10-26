@@ -4,6 +4,7 @@ import { ScrollSpyProvider } from "@/components/ScrollSpy";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Photos from "@/components/sections/Photos";
+import Channel from "@/components/sections/Channel";
 import Awards from "@/components/sections/Awards";
 import Music from "@/components/sections/Music";
 import Movies from "@/components/sections/Movies";
@@ -44,6 +45,9 @@ export default async function Home() {
           <div id="work" className="scroll-mt-16">
             <div id="projects" className="scroll-mt-20">
               <Projects />
+            </div>
+            <div id="channel" className="scroll-mt-20">
+              <Channel />
             </div>
             <div id="awards" className="scroll-mt-20">
               <Awards />

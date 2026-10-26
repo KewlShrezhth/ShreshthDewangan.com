@@ -10,6 +10,7 @@ const csp = [
   "media-src 'self' https://*.apple.com https://*.mzstatic.com",
   "font-src 'self' data:",
   `connect-src 'self'${isDev ? " ws:" : ""}`,
+  "frame-src https://www.youtube-nocookie.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
