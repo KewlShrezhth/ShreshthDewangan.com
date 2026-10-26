@@ -5,7 +5,7 @@ import ChannelRow from "@/components/ChannelRow";
 import { getChannel, CHANNEL_URL, SUBSCRIBE_URL } from "@/lib/youtube";
 
 const DESCRIPTION =
-  "A YouTube channel I run: explainer videos on health and AI that I research, script and edit myself.";
+  "A YouTube channel I started in October 2026: explainer videos on AI and health that I research, script and edit myself. 20 videos and 1,000+ views in the first two weeks.";
 const linkClass =
   "group/link inline-flex items-center gap-1.5 text-ink underline decoration-line hover:decoration-accent underline-offset-4 transition-colors hover:text-accent";
 
