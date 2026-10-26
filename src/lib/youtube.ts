@@ -52,7 +52,7 @@ export async function getChannel(): Promise<Channel | null> {
       .filter((v) => v.status?.privacyStatus === "public")
       .map((v) => ({
         id: v.id,
-        title: v.snippet.title,
+        title: v.snippet.title.replace(/\s*#shorts\b/gi, "").trim(),
         publishedAt: v.snippet.publishedAt,
         thumb: (v.snippet.thumbnails.high ?? v.snippet.thumbnails.medium ?? v.snippet.thumbnails.default).url,
         isShort:

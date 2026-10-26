@@ -61,7 +61,7 @@ export default function ChannelRow({ videos }: { videos: Video[] }) {
         role="region"
         aria-label="Latest Informator videos"
         tabIndex={0}
-        className="flex items-start gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm [scrollbar-width:thin]"
+        className="flex items-start gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm [scrollbar-width:thin] [scrollbar-color:var(--color-accent)_transparent]"
       >
         {videos.map((v) => (
           <li key={v.id} className="snap-start shrink-0">
