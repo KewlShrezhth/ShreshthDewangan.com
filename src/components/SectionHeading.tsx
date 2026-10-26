@@ -2,7 +2,9 @@ export default function SectionHeading({
   index,
   title,
   note,
+  titleSize = "text-3xl md:text-4xl",
 }: {
+  titleSize?: string;
   index?: string;
   title: string;
   note?: string;
@@ -15,7 +17,7 @@ export default function SectionHeading({
         </span>
       )}
       <div>
-        <h2 className="font-display text-3xl md:text-4xl uppercase tracking-tight text-ink">
+        <h2 className={`font-display ${titleSize} uppercase tracking-tight text-ink`}>
           {title}
         </h2>
         <span
