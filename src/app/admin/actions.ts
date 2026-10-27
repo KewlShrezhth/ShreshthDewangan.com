@@ -20,7 +20,8 @@ type ListTable =
   | "music"
   | "movies"
   | "interests"
-  | "education";
+  | "education"
+  | "thoughts";
 
 const LIST_TABLES: Record<ListTable, { columns: string[]; arrayColumns?: string[]; urlColumns?: string[] }> = {
   projects: { columns: ["name", "description", "stack", "images", "github", "live"], arrayColumns: ["stack", "images"], urlColumns: ["github", "live"] },
@@ -30,6 +31,7 @@ const LIST_TABLES: Record<ListTable, { columns: string[]; arrayColumns?: string[
   movies: { columns: ["title", "year", "poster", "rating", "thoughts", "link"], urlColumns: ["link"] },
   interests: { columns: ["label"] },
   education: { columns: ["school", "detail"] },
+  thoughts: { columns: ["title", "date", "body", "link"], urlColumns: ["link"] },
 };
 
 function getTableConfig(table: unknown) {

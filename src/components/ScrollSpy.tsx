@@ -2,10 +2,10 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export type SectionId = "about" | "work" | "life";
+export type SectionId = "about" | "work" | "thoughts" | "life";
 
-const IDS: SectionId[] = ["about", "work", "life"];
-const LEGACY = ["work", "life", "projects", "awards", "photos", "music", "movies"];
+const IDS: SectionId[] = ["about", "work", "thoughts", "life"];
+const LEGACY = ["work", "thoughts", "life", "projects", "awards", "photos", "music", "movies"];
 
 export function scrollToId(id: string) {
   const el = id === "about" ? null : document.getElementById(id);

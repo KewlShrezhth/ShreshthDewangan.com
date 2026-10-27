@@ -6,16 +6,19 @@ import { useActiveSection, scrollToId, type SectionId } from "@/components/Scrol
 export default function Nav({
   siteName,
   hasWork = true,
+  hasThoughts = false,
   hasLife = true,
 }: {
   siteName: string;
   hasWork?: boolean;
+  hasThoughts?: boolean;
   hasLife?: boolean;
 }) {
   const active = useActiveSection();
   const nav: { id: SectionId; label: string }[] = [
     { id: "about", label: "About" },
     ...(hasWork ? [{ id: "work" as const, label: "Work" }] : []),
+    ...(hasThoughts ? [{ id: "thoughts" as const, label: "Thoughts" }] : []),
     ...(hasLife ? [{ id: "life" as const, label: "Life" }] : []),
   ];
   const [open, setOpen] = useState(false);

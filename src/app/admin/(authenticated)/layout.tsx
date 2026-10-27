@@ -11,6 +11,7 @@ const sections = [
   { href: "/admin/projects", label: "Projects" },
   { href: "/admin/photos", label: "Photos" },
   { href: "/admin/awards", label: "Awards" },
+  { href: "/admin/thoughts", label: "Thoughts" },
   { href: "/admin/music", label: "Music" },
   { href: "/admin/movies", label: "Movies" },
 ];

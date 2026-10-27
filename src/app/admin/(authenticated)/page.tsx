@@ -5,6 +5,7 @@ const sections = [
   { href: "/admin/projects", label: "Projects", desc: "Add, edit, remove, and reorder projects" },
   { href: "/admin/photos", label: "Photos", desc: "Manage the photo gallery" },
   { href: "/admin/awards", label: "Awards", desc: "Manage awards and recognition" },
+  { href: "/admin/thoughts", label: "Thoughts", desc: "Write and manage short posts" },
   { href: "/admin/music", label: "Music", desc: "Manage songs and albums" },
   { href: "/admin/movies", label: "Movies", desc: "Manage movies" },
 ];

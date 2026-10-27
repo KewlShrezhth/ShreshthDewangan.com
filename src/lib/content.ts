@@ -91,6 +91,27 @@ export async function getPhotos(): Promise<Photo[]> {
   return rows;
 }
 
+export type Thought = {
+  id: number;
+  title: string;
+  date: string;
+  body: string;
+  link: string | null;
+};
+
+export async function getThoughts(): Promise<Thought[]> {
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, title, date, body, link FROM thoughts ORDER BY sort_order DESC, id DESC"
+    );
+    return rows;
+  } catch (e) {
+    // 42P01 = table missing (migration not run yet)
+    if ((e as { code?: string }).code === "42P01") return [];
+    throw e;
+  }
+}
+
 export async function getAwards(): Promise<Award[]> {
   const { rows } = await pool.query(
     "SELECT id, title, organization, year, description, image FROM awards ORDER BY sort_order ASC, id ASC"

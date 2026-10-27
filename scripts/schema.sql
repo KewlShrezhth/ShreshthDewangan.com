@@ -88,3 +88,5 @@ CREATE TABLE IF NOT EXISTS login_attempts (
 );
 
 CREATE INDEX IF NOT EXISTS login_attempts_ip_time ON login_attempts (ip, attempted_at);
+
+CREATE TABLE IF NOT EXISTS thoughts (id SERIAL PRIMARY KEY, title TEXT NOT NULL, date TEXT NOT NULL DEFAULT '', body TEXT NOT NULL DEFAULT '', link TEXT, sort_order INTEGER NOT NULL DEFAULT 0);
