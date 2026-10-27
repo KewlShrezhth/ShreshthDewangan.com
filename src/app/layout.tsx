@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Inter } from "next/font/google";
+import { Anton, Source_Serif_4 } from "next/font/google";
 import { getSiteName } from "@/lib/content";
 import CursorSpotlight from "@/components/CursorSpotlight";
 import "./globals.css";
@@ -10,7 +10,7 @@ const anton = Anton({
   weight: "400",
 });
 
-const inter = Inter({
+const sourceSerif = Source_Serif_4({
   variable: "--font-body",
   subsets: ["latin"],
 });
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${anton.variable} ${inter.variable}`}
+      className={`${anton.variable} ${sourceSerif.variable}`}
     >
       <body className="min-h-full flex flex-col">
         <CursorSpotlight />
