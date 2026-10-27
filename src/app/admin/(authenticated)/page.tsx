@@ -6,6 +6,7 @@ const sections = [
   { href: "/admin/photos", label: "Photos", desc: "Manage the photo gallery" },
   { href: "/admin/awards", label: "Awards", desc: "Manage awards and recognition" },
   { href: "/admin/thoughts", label: "Thoughts", desc: "Write and manage short posts" },
+  { href: "/admin/stats", label: "Ticker stats", desc: "Highlights shown in the scrolling ticker" },
   { href: "/admin/music", label: "Music", desc: "Manage songs and albums" },
   { href: "/admin/movies", label: "Movies", desc: "Manage movies" },
 ];

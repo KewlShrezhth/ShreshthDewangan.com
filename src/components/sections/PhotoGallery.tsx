@@ -115,14 +115,14 @@ function FilmReel({ photos, onOpen }: { photos: Photo[]; onOpen: () => void }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] gap-6 md:gap-12 items-center">
       <div className="order-2 md:order-1 text-center md:text-left">
-        <p className="font-display text-6xl md:text-8xl leading-none text-ink">
+        <p className="font-mono text-5xl md:text-7xl font-semibold leading-none text-ink">
           {String(number).padStart(2, "0")}
           <span className="text-2xl md:text-3xl text-ink-faint"> / {String(photos.length).padStart(2, "0")}</span>
         </p>
         <p className="mt-4 min-h-[1.5rem] text-ink-soft">{current.caption}</p>
         <button
           onClick={onOpen}
-          className="press mt-6 rounded-full border border-line px-5 py-2 text-sm uppercase tracking-wide text-ink transition-colors hover:border-gold/60 hover:text-accent"
+          className="press mt-6 rounded-sm border border-gold px-5 py-2 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-paper"
         >
           View all {photos.length}
         </button>
@@ -260,7 +260,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           <button
             key={photo.id}
             onClick={() => setActiveIndex(i)}
-            className="group mb-4 block w-full overflow-hidden rounded-sm shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group mb-4 block w-full overflow-hidden rounded-sm transition-transform duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Image
               src={photo.src}

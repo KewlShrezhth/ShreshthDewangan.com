@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { Anton, Source_Serif_4 } from "next/font/google";
+import { Cinzel, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import { getSiteName } from "@/lib/content";
-import CursorSpotlight from "@/components/CursorSpotlight";
 import "./globals.css";
 
-const anton = Anton({
+const cinzel = Cinzel({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["500", "700"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "600"],
 });
 
 const sourceSerif = Source_Serif_4({
@@ -38,10 +43,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${anton.variable} ${sourceSerif.variable}`}
+      className={`${cinzel.variable} ${plexMono.variable} ${sourceSerif.variable}`}
     >
       <body className="min-h-full flex flex-col">
-        <CursorSpotlight />
         <div className="relative z-10 flex min-h-full flex-1 flex-col">{children}</div>
       </body>
     </html>

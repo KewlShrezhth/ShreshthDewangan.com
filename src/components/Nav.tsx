@@ -38,7 +38,7 @@ export default function Nav({
 
   return (
     <header
-      className={`sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-paper/80 bg-paper/95 transition-shadow duration-300 ${
+      className={`sticky top-0 z-50 bg-paper transition-shadow duration-300 ${
         scrolled
           ? "shadow-[0_12px_20px_-16px_rgba(0,0,0,0.6)]"
           : "shadow-[0_1px_0_0_var(--line)]"
@@ -49,7 +49,7 @@ export default function Nav({
         <div className="flex h-16 items-center justify-between">
           <button
             onClick={() => go("about")}
-            className="press font-display text-lg uppercase tracking-tight text-ink transition-colors hover:text-accent"
+            className="press font-display text-lg text-ink transition-colors hover:text-gold"
           >
             {siteName}
           </button>
@@ -59,15 +59,15 @@ export default function Nav({
               <button
                 key={n.id}
                 onClick={() => go(n.id)}
-                className={`press group relative py-1 text-sm uppercase tracking-wide transition-colors ${
+                className={`press group relative py-1 text-[15px] transition-colors ${
                   active === n.id
-                    ? "text-accent"
+                    ? "text-gold"
                     : "text-ink-soft hover:text-ink"
                 }`}
               >
                 {n.label}
                 <span
-                  className={`absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100 ${
+                  className={`absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-300 ease-out group-hover:scale-x-100 ${
                     active === n.id ? "scale-x-100" : ""
                   }`}
                 />
@@ -96,13 +96,13 @@ export default function Nav({
       </div>
 
       {open && (
-        <nav className="md:hidden border-t border-line px-6 py-4 flex flex-col gap-4 bg-paper">
+        <nav className="md:hidden border-y border-gold/25 bg-surface px-6 py-2 flex flex-col">
           {nav.map((n) => (
             <button
               key={n.id}
               onClick={() => go(n.id)}
-              className={`press text-left text-sm ${
-                active === n.id ? "text-accent" : "text-ink-soft"
+              className={`press py-3 text-left text-base ${
+                active === n.id ? "text-gold" : "text-ink-soft"
               }`}
             >
               {n.label}

@@ -19,7 +19,7 @@ export default async function Thoughts() {
               <article className="py-8 border-b border-line">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 className="font-display text-xl text-ink">{t.title}</h3>
-                  <span className="text-sm text-accent">{t.date}</span>
+                  <span className="font-mono text-sm text-gold">{t.date}</span>
                 </div>
                 <div className="mt-3 max-w-2xl space-y-4 text-ink-soft leading-relaxed">
                   {t.body

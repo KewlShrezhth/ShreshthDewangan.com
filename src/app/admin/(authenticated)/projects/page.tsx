@@ -18,6 +18,8 @@ export default async function AdminProjectsPage() {
         { name: "images", label: "Project image", type: "image" },
         { name: "github", label: "GitHub URL" },
         { name: "live", label: "Live URL" },
+        { name: "symbol", label: "Ticker symbol (optional, e.g. RBP)" },
+        { name: "status", label: "Status (optional, e.g. LIVE)" },
       ]}
     />
   );

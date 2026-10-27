@@ -4,6 +4,7 @@ import Placeholder from "@/components/Placeholder";
 import SectionHeading from "@/components/SectionHeading";
 import { getProjects } from "@/lib/content";
 import { unopt } from "@/lib/image";
+import { projectStatus, projectSymbol } from "@/components/Ticker";
 
 export default async function Projects() {
   const projects = await getProjects();
@@ -20,7 +21,7 @@ export default async function Projects() {
           {projects.map((project, i) => (
             <Reveal key={project.id} delay={i * 80}>
               <article className="py-10 md:py-14 grid grid-cols-1 md:grid-cols-[280px_minmax(0,1fr)] gap-8 md:gap-14 items-start">
-                <div className="order-2 md:order-1 overflow-hidden rounded-sm shadow-soft">
+                <div className="order-2 md:order-1 overflow-hidden rounded-sm border border-gold/35">
                   {project.images[0] ? (
                     <Image
                       src={project.images[0]}
@@ -40,7 +41,14 @@ export default async function Projects() {
                 </div>
 
                 <div className="order-1 md:order-2">
-                  <h3 className="font-display uppercase text-2xl md:text-3xl text-ink">
+                  {/* Holding row: ticker symbol and status, like a line in a portfolio statement. */}
+                  <p className="mb-2 flex max-w-2xl items-baseline justify-between gap-4 font-mono text-xs font-semibold tracking-[0.1em] text-gold">
+                    <span>{"$" + projectSymbol(project)}</span>
+                    <span className="text-mint">
+                      <span aria-hidden="true" className="font-body text-[9px]">▲</span> {projectStatus(project)}
+                    </span>
+                  </p>
+                  <h3 className="font-display text-xl sm:text-2xl md:text-3xl leading-tight text-ink break-words">
                     {project.name}
                   </h3>
                   <p className="mt-3 text-ink-soft leading-relaxed max-w-2xl">
@@ -51,7 +59,7 @@ export default async function Projects() {
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs tracking-wide uppercase px-2.5 py-1 border border-line text-ink-faint rounded-full"
+                        className="font-mono text-[11px] px-2.5 py-1 border border-gold/25 text-ink-soft rounded-full"
                       >
                         {tech}
                       </span>

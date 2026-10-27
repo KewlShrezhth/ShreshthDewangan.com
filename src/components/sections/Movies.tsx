@@ -26,7 +26,7 @@ export default async function Movies() {
           {movies.map((movie, i) => (
             <Reveal key={movie.id} delay={i * 80}>
               <div className="group">
-                <div className="overflow-hidden rounded-sm shadow-soft transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-lift">
+                <div className="overflow-hidden rounded-sm transition-transform duration-300 group-hover:-translate-y-0.5">
                   {movie.poster ? (
                     <Image
                       src={movie.poster}
@@ -53,7 +53,7 @@ export default async function Movies() {
                     movie.title
                   )}
                 </h3>
-                <p className="text-sm text-ink-faint">
+                <p className="mt-0.5 font-mono text-[13px] text-ink-faint">
                   {movie.year}
                   {movie.rating ? ` · ${movie.rating}` : ""}
                 </p>

@@ -19,7 +19,7 @@ export default async function Awards() {
         <div className="space-y-0 border-t border-line">
           {awards.map((award, i) => (
             <Reveal key={award.id} delay={i * 80}>
-              <div className="group py-8 border-b border-line flex flex-col sm:flex-row gap-6 sm:items-center transition-all duration-300 hover:px-3 hover:bg-surface/50 hover:shadow-soft rounded-sm">
+              <div className="group py-8 border-b border-line flex flex-col sm:flex-row gap-6 sm:items-center transition-all duration-300 hover:px-3 hover:bg-surface rounded-sm">
                 {award.image ? (
                   <Image
                     src={award.image}
@@ -28,12 +28,12 @@ export default async function Awards() {
                     height={80}
                     sizes="80px"
                     unoptimized={unopt(award.image)}
-                    className="w-20 h-20 object-cover rounded-sm shrink-0 shadow-soft ring-1 ring-gold/30 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-2"
+                    className="w-20 h-20 object-cover rounded-sm shrink-0 ring-1 ring-gold/35 transition-transform duration-300 group-hover:scale-105"
                   />
                 ) : (
                   <Placeholder
                     label=""
-                    className="w-20 h-20 rounded-sm shrink-0 shadow-soft ring-1 ring-gold/30 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-2"
+                    className="w-20 h-20 rounded-sm shrink-0 ring-1 ring-gold/35 transition-transform duration-300 group-hover:scale-105"
                   />
                 )}
 
@@ -42,7 +42,7 @@ export default async function Awards() {
                     <h3 className="font-display text-xl text-ink transition-colors duration-300 group-hover:text-accent">
                       {award.title}
                     </h3>
-                    <span className="text-sm text-accent">{award.year}</span>
+                    <span className="font-mono text-sm text-gold">{award.year}</span>
                   </div>
                   <p className="text-sm text-ink-faint mt-0.5">{award.organization}</p>
                   {award.description && (

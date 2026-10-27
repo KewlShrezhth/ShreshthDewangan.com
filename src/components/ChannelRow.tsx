@@ -9,7 +9,7 @@ import { useModalFocus } from "@/lib/useModalFocus";
 const fmt = (d: string) =>
   new Date(d).toLocaleDateString("en", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 
-const badge = "absolute left-2 top-2 rounded-sm bg-gold px-1.5 py-0.5 text-[10px] font-semibold tracking-widest text-paper";
+const badge = "absolute left-2 top-2 rounded-sm bg-gold px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-[0.08em] text-paper";
 
 function Card({ v, label, onPlay, className = "" }: { v: Video; label: string; onPlay: (v: Video) => void; className?: string }) {
   return (
@@ -20,7 +20,7 @@ function Card({ v, label, onPlay, className = "" }: { v: Video; label: string; o
       className={`group flex flex-col text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm ${className}`}
     >
       <span
-        className={`relative block overflow-hidden rounded-sm shadow-soft ${
+        className={`relative block overflow-hidden rounded-sm border border-gold/35 ${
           v.isShort
             ? "mx-auto w-full max-w-[280px] aspect-[9/16] md:max-w-none md:aspect-auto md:flex-1 md:min-h-0"
             : "aspect-video w-full"
@@ -45,7 +45,7 @@ function Card({ v, label, onPlay, className = "" }: { v: Video; label: string; o
       </span>
       <span className="mt-3 block w-0 min-w-full">
         <span className="line-clamp-2 text-sm text-ink">{v.title}</span>
-        <span className="mt-1 block text-xs text-ink-faint">{fmt(v.publishedAt)}</span>
+        <span className="mt-1 block font-mono text-xs text-ink-faint">{fmt(v.publishedAt)}</span>
       </span>
     </button>
   );

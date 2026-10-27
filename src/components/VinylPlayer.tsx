@@ -112,15 +112,15 @@ function NowPlaying({
   if (!track) {
     return (
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Now spinning</p>
-        <p className="mt-2 font-display text-2xl uppercase leading-tight text-ink-faint">Nothing spinning yet</p>
+        <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-gold">Now spinning</p>
+        <p className="mt-2 font-display text-2xl leading-tight text-ink-faint">Nothing spinning yet</p>
       </div>
     );
   }
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Now spinning</p>
-      <h3 className="mt-2 font-display text-3xl md:text-4xl uppercase leading-tight text-ink">{track.title}</h3>
+      <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-gold">Now spinning</p>
+      <h3 className="mt-2 font-display text-3xl md:text-4xl leading-tight text-ink break-words">{track.title}</h3>
       <p className="mt-1 text-ink-soft">{track.artist}</p>
       {track.note && <p className="mt-3 text-sm text-ink-soft">{track.note}</p>}
 
@@ -158,7 +158,7 @@ function Cover({ t, sizes, active = false }: { t: Track; sizes: string; active?:
   return (
     <>
       <span
-        className={`block overflow-hidden rounded-sm shadow-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lift ${
+        className={`block overflow-hidden rounded-sm transition-transform duration-300 group-hover:-translate-y-0.5 ${
           active ? "ring-2 ring-gold" : ""
         }`}
       >
@@ -251,7 +251,7 @@ function DesktopDeck({
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          <p className="font-mono text-[13px] font-semibold uppercase tracking-[0.1em] text-gold">
             Drag a record onto the turntable, or click one
           </p>
           <div className="mt-6 grid grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">

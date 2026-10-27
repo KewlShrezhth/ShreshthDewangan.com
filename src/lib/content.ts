@@ -16,6 +16,8 @@ export type Project = {
   images: string[];
   github: string | null;
   live: string | null;
+  symbol: string | null;
+  status: string | null;
 };
 export type Photo = { id: number; src: string; alt: string; caption: string | null };
 export type Award = {
@@ -78,10 +80,34 @@ export async function getEducation(): Promise<Education[]> {
 }
 
 export async function getProjects(): Promise<Project[]> {
-  const { rows } = await pool.query(
-    "SELECT id, name, description, stack, images, github, live FROM projects ORDER BY sort_order ASC, id ASC"
-  );
-  return rows;
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, name, description, stack, images, github, live, symbol, status FROM projects ORDER BY sort_order ASC, id ASC"
+    );
+    return rows;
+  } catch (e) {
+    // 42703 = column missing (deploy ran before the migration): fall back to the old columns
+    if ((e as { code?: string }).code !== "42703") throw e;
+    const { rows } = await pool.query(
+      "SELECT id, name, description, stack, images, github, live, NULL AS symbol, NULL AS status FROM projects ORDER BY sort_order ASC, id ASC"
+    );
+    return rows;
+  }
+}
+
+export type Stat = { id: number; label: string; value: string };
+
+export async function getStats(): Promise<Stat[]> {
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, label, value FROM stats ORDER BY sort_order ASC, id ASC"
+    );
+    return rows;
+  } catch (e) {
+    // 42P01 = table missing (migration not run yet)
+    if ((e as { code?: string }).code === "42P01") return [];
+    throw e;
+  }
 }
 
 export async function getPhotos(): Promise<Photo[]> {

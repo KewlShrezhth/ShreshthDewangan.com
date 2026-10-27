@@ -17,7 +17,7 @@ export default async function Channel() {
     <section className="pt-14 md:pt-20 pb-14 md:pb-20">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal>
-          <SectionHeading title="Informator" titleSize="text-5xl md:text-7xl" note={DESCRIPTION} />
+          <SectionHeading title="Informator" titleSize="text-4xl sm:text-5xl md:text-7xl" note={DESCRIPTION} />
           <div className="-mt-4 mb-8 flex items-center gap-4 text-sm">
             {live && channel.avatar && (
               <Image

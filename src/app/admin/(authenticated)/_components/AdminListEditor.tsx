@@ -67,7 +67,8 @@ export default function AdminListEditor<T extends { id: number }>({
     | "movies"
     | "interests"
     | "education"
-    | "thoughts";
+    | "thoughts"
+    | "stats";
   title: string;
   fields: FieldConfig[];
   items: T[];

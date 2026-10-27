@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import Ticker from "@/components/Ticker";
 import { ScrollSpyProvider } from "@/components/ScrollSpy";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
@@ -41,6 +42,7 @@ export default async function Home() {
   return (
     <ScrollSpyProvider>
       <Nav siteName={site.name} hasWork={hasWork} hasThoughts={hasThoughts} hasLife={hasLife} />
+      <Ticker />
       <main>
         <div id="about" className="scroll-mt-16">
           <About />

@@ -5,7 +5,7 @@ export const CHANNEL_URL = `https://www.youtube.com/channel/${CHANNEL_ID}`;
 export const SUBSCRIBE_URL = `${CHANNEL_URL}?sub_confirmation=1`;
 
 export type Video = { id: string; title: string; publishedAt: string; thumb: string; isShort: boolean; views: number };
-export type Channel = { title: string; avatar: string | null; long: Video[]; short: Video | null };
+export type Channel = { title: string; avatar: string | null; long: Video[]; short: Video | null; videoCount: number; viewCount: number };
 
 const API = "https://www.googleapis.com/youtube/v3";
 
@@ -41,7 +41,7 @@ export async function getChannel(): Promise<Channel | null> {
   const key = process.env.YOUTUBE_API_KEY;
   if (!key) return null;
   try {
-    const ch = (await get("channels", { part: "snippet,contentDetails", id: CHANNEL_ID }, key)).items?.[0];
+    const ch = (await get("channels", { part: "snippet,contentDetails,statistics", id: CHANNEL_ID }, key)).items?.[0];
     if (!ch) return null;
     const uploads = ch.contentDetails?.relatedPlaylists?.uploads ?? "UU" + CHANNEL_ID.slice(2);
     const list = await get("playlistItems", { part: "contentDetails", playlistId: uploads, maxResults: "50" }, key);
@@ -74,6 +74,8 @@ export async function getChannel(): Promise<Channel | null> {
       avatar: ch.snippet.thumbnails?.default?.url ?? null,
       long,
       short,
+      videoCount: Number(ch.statistics?.videoCount ?? 0),
+      viewCount: Number(ch.statistics?.viewCount ?? 0),
     };
   } catch {
     cacheLife("minutes"); // a short outage should not hide the row for an hour
